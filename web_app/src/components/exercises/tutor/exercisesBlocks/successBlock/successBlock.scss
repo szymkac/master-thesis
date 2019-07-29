@@ -1,0 +1,32 @@
+svg.check-mark {
+    margin: 0 auto;
+    height: 250px;
+    width: 0;
+    -webkit-animation-name: show-svg;
+    -webkit-animation-duration: 1s;
+    animation-name: show-svg;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes show-svg {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 250px;
+    }
+}
+
+@keyframes show-svg {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 250px;
+    }
+}
