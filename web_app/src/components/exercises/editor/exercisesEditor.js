@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { compose } from 'recompose';
+import { withRouter } from 'react-router-dom';
 import { withFirebase } from '../../../pages/Firebase/index';
 import ExcercisesDiagramWidget from './exercisesDiagramWidget';
 import { TextBox, TextArea } from '../../common';
 import { RowContainer } from '../../commonStyled';
+import * as ROUTES from '../../../constants/routes';
 
 
 class ExercisesEditor extends Component {
@@ -20,14 +23,13 @@ class ExercisesEditor extends Component {
 
     componentDidMount() {
         const { match } = this.props;
-        console.log(match.params.id)
-        if (!!match.params.id && match.params.id !== "new")
+        if (!!match.params.id && match.params.id !== ROUTES.EXERCISES_CREATOR)
             this.fetchData();
     }
 
     componentDidUpdate(prevProps) {
         const { match } = this.props;
-        if (!!match.params.id && match.params.id !== prevProps.match.params.id && match.params.id !== "new")
+        if (!!match.params.id && match.params.id !== prevProps.match.params.id && match.params.id !== ROUTES.EXERCISES_CREATOR)
             this.fetchData();
         else if (!match.params.id && !!this.state.exercise)
             this.setState({
@@ -60,10 +62,14 @@ class ExercisesEditor extends Component {
         const { firebase, match } = this.props;
         const { name, description } = this.state;
         const model = { ...this.exerciseDiagramRef.current.getModelToSaving(), name, description };
-        if (!match.params.id || match.params.id === "new")
-            firebase.exercises().push(model);
+        if (!match.params.id || match.params.id === ROUTES.EXERCISES_CREATOR)
+            firebase.exercises().push(model, this.redirectToExercises);
         else
-            firebase.db.ref(`exercises/${match.params.id}`).set(model);
+            firebase.db.ref(`exercises/${match.params.id}`).set(model, this.redirectToExercises);
+    }
+
+    redirectToExercises = () => {
+        this.props.history.push(`${ROUTES.EXERCISES}${ROUTES.EXERCISES_LANDING}`);
     }
 
     render() {
@@ -78,10 +84,13 @@ class ExercisesEditor extends Component {
                     <TextArea propertyName="description" labelText="Exercise description" value={description} onChange={this.onValueChange} />
                     <button onClick={this.onSave}>Save</button>
                 </RowContainer>
-                {match.params.id === "new" || !!exercise ? <ExcercisesDiagramWidget ref={this.exerciseDiagramRef} exercise={exercise} /> : null}
+                {match.params.id === ROUTES.EXERCISES_CREATOR || !!exercise ? <ExcercisesDiagramWidget ref={this.exerciseDiagramRef} exercise={exercise} /> : null}
             </div>
         )
     }
 }
 
-export default withFirebase(ExercisesEditor);
+export default compose(
+    withFirebase,
+    withRouter
+)(ExercisesEditor);

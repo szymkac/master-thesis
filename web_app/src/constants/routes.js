@@ -8,5 +8,5 @@ export const PASSWORD_FORGET = '/pw-forget';
 export const EXERCISES = '/exercises';
 export const EXERCISES_LANDING = '/';
 export const EXERCISES_EDITOR = 'editor';
-export const EXERCISES_CREATOR = '/new';
+export const EXERCISES_CREATOR = 'new';
 export const EXERCISES_TUTOR = 'tutor';

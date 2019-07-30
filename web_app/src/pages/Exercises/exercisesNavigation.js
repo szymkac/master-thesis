@@ -5,7 +5,7 @@ import * as ROUTES from '../../constants/routes';
 const ExercisesNavigation = ({ match }) => (
     <ul>
         <li>
-            <Link to={`${match.url}${ROUTES.EXERCISES_EDITOR}${ROUTES.EXERCISES_CREATOR}`}>Create new exercise</Link>
+            <Link to={`${match.url}${ROUTES.EXERCISES_EDITOR}/${ROUTES.EXERCISES_CREATOR}`}>Create new exercise</Link>
         </li>
         <li>
             <Link to={`${match.url}${ROUTES.EXERCISES_EDITOR}`}>Edit yours exercises</Link>
@@ -37,7 +37,7 @@ const ExercisesTutorNavigation = ({ match, exercises, authUser, hand }) => (
 const ExercisesEditorNavigation = ({ match, exercises }) => (
     <ul>
         <li>
-            <Link to={`${match.url}${ROUTES.EXERCISES_CREATOR}`}>Create new</Link>
+            <Link to={`${match.url}/${ROUTES.EXERCISES_CREATOR}`}>Create new</Link>
         </li>
         {
             exercises.map(x =>
