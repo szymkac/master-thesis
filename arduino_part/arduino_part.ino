@@ -72,7 +72,6 @@ const float mRes {10. * 4912. / 32760.0};
 
 void setup(){
   Serial.begin(9600);
-  //Serial.println("Master thesis says welcome!!");
   
   //INITS!!
   Wire.begin();

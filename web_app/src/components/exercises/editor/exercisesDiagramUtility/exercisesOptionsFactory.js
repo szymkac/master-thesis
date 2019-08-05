@@ -4,11 +4,16 @@ const getOptionsConfig = exercise => {
     switch (exercise) {
         case "LIFTING":
         case "PUTTING":
-        case "SHIFTING":
         case "ROTATION":
-        case "SHAKING":
         case "TOUCHING":
             return {};
+        case "SHAKING":
+            return {
+                time: { component: TextBox, labelText: "Time of shaking [s]" },
+                threshold: { component: TextBox, labelText: "Acceleration threshold [mg]", validation: { min: 1, max: 120 } }
+            }
+        case "SHIFTING":
+            return { threshold: { component: TextBox, labelText: "Acceleration threshold [mg]", validation: { min: 0.3, max: 0.8 } } }
         case "PRESSURE":
             return {
                 time: { component: TextBox, labelText: "Time of pressure [s]" },
@@ -28,11 +33,13 @@ const getOptionsValues = exercise => {
     switch (exercise) {
         case "LIFTING":
         case "PUTTING":
-        case "SHIFTING":
         case "ROTATION":
-        case "SHAKING":
         case "TOUCHING":
             return {};
+        case "SHAKING":
+            return { time: 1, threshold: 0.4 }; //TODO change units
+        case "SHIFTING":
+            return { threshold: 0.4 }; //TODO change units
         case "PRESSURE":
             return { time: 3, threshold: 60, rigor: true };
         case "LOOP":
