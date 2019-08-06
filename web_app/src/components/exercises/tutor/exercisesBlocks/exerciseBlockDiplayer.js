@@ -16,28 +16,27 @@ class ExerciseBlockDiplayer extends Component {
     render() {
         let exerciseBlock = null;
         const { model, onStepDone } = this.props;
-
         switch (model.customType) {
             case "LIFTING":
-                exerciseBlock = <LiftingBlock {...this.props} />;
+                exerciseBlock = <LiftingBlock {...this.props} key={model.id} />;
                 break;
             case "PUTTING":
-                exerciseBlock = <PuttingBlock {...this.props} />;
+                exerciseBlock = <PuttingBlock {...this.props} key={model.id} />;
                 break;
             case "SHIFTING":
-                exerciseBlock = <ShiftingBlock {...this.props} />;
+                exerciseBlock = <ShiftingBlock {...this.props} key={model.id} />;
                 break;
             case "ROTATION":
-                exerciseBlock = <RotationBlock {...this.props} />;
+                exerciseBlock = <RotationBlock {...this.props} key={model.id} />;
                 break;
             case "SHAKING":
-                exerciseBlock = <ShakingBlock {...this.props} />;
+                exerciseBlock = <ShakingBlock {...this.props} key={model.id} />;
                 break;
             case "TOUCHING":
-                exerciseBlock = <TouchingBlock {...this.props} />;
+                exerciseBlock = <TouchingBlock {...this.props} key={model.id} />;
                 break;
             case "PRESSURE":
-                exerciseBlock = <PressureBlock {...this.props} onStepDone={onStepDone} />;
+                exerciseBlock = <PressureBlock {...this.props} onStepDone={onStepDone} key={model.id} />;
                 break;
             case "START":
                 exerciseBlock = <DelayBlock text="Start in: " onStepDone={onStepDone} />;
@@ -46,10 +45,10 @@ class ExerciseBlockDiplayer extends Component {
                 exerciseBlock = <TextBlock text="FINISH!!!!!! HURRAY :)" />;
                 break;
             case "DELAY":
-                exerciseBlock = <DelayBlock text="Wait: " model={model} onStepDone={onStepDone} />;
+                exerciseBlock = <DelayBlock text="Wait: " model={model} onStepDone={onStepDone} key={model.id} />;
                 break;
             case "SUCCESS":
-                exerciseBlock = <SuccessBlock onStepDone={onStepDone}/>
+                exerciseBlock = <SuccessBlock onStepDone={onStepDone} />
                 break;
             default:
                 exerciseBlock = null;

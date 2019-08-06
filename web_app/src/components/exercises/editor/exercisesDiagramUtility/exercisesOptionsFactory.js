@@ -10,7 +10,7 @@ const getOptionsConfig = exercise => {
         case "SHAKING":
             return {
                 time: { component: TextBox, labelText: "Time of shaking [s]" },
-                threshold: { component: TextBox, labelText: "Acceleration threshold [mg]", validation: { min: 1, max: 120 } }
+                threshold: { component: TextBox, labelText: "Acceleration threshold [mg]", validation: { min: 0.3, max: 0.8 } }
             }
         case "SHIFTING":
             return { threshold: { component: TextBox, labelText: "Acceleration threshold [mg]", validation: { min: 0.3, max: 0.8 } } }

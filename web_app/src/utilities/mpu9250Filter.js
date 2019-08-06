@@ -1,10 +1,18 @@
-const filterAcceleration = data => {
+const filterNormAcceleration = data => {
     let a = normalize({
         x: -data.a[0],
         y: data.a[1],
         z: data.a[2]
     });
     return a;
+}
+
+const filterAcceleration = data => {
+    return {
+        x: -data.a[0],
+        y: data.a[1],
+        z: data.a[2]
+    };
 }
 
 const filterAll = data => {
@@ -26,6 +34,6 @@ const normalize = toNormalize => {
     }
 }
 
-export { filterAcceleration }
+export { filterAcceleration, filterNormAcceleration }
 
 export default filterAll;
