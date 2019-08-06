@@ -17,7 +17,9 @@ class TouchReflexIndicator extends Component {
     }
 
     restartAnimation = () => {
-        const el = this.animRef.current;
+        console.log("im trying")
+        let el = this.animRef.current;
+        el.style.animationIterationCount = 1;
         el.style.animation = 'none';
         el.getClientRects();
         el.style.animation = null;

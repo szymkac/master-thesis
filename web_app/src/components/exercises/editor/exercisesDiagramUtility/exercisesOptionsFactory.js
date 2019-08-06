@@ -5,8 +5,17 @@ const getOptionsConfig = exercise => {
         case "LIFTING":
         case "PUTTING":
         case "ROTATION":
-        case "TOUCHING":
             return {};
+        case "TOUCHING":
+            return {
+                thumb: { component: CheckBox, labelText: "Touth with thumb" },
+                index: { component: CheckBox, labelText: "Touth with index finger" },
+                middle: { component: CheckBox, labelText: "Touth with middle finger" },
+                ring: { component: CheckBox, labelText: "Touth with ring finger" },
+                little: { component: CheckBox, labelText: "Touth with little finger" },
+                random: { component: CheckBox, labelText: "Randomly select fingers to touch" },
+                randomMax: { component: TextBox, labelText: "Amount of fingers to select randomly" } //TODO disabled finger selection on random and enalbled randomMax (Maybe by extra onChange?)
+            };
         case "SHAKING":
             return {
                 time: { component: TextBox, labelText: "Time of shaking [s]" },
@@ -34,8 +43,17 @@ const getOptionsValues = exercise => {
         case "LIFTING":
         case "PUTTING":
         case "ROTATION":
-        case "TOUCHING":
             return {};
+        case "TOUCHING":
+            return {
+                thumb: false,
+                index: false,
+                middle: false,
+                ring: false,
+                little: false,
+                random: false,
+                randomMax: null 
+            };
         case "SHAKING":
             return { time: 1, threshold: 0.4 }; //TODO change units
         case "SHIFTING":

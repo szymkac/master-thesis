@@ -36,7 +36,7 @@ class ExerciseBlockDiplayer extends Component {
                 exerciseBlock = <TouchingBlock {...this.props} key={model.id} />;
                 break;
             case "PRESSURE":
-                exerciseBlock = <PressureBlock {...this.props} onStepDone={onStepDone} key={model.id} />;
+                exerciseBlock = <PressureBlock {...this.props} key={model.id} />;
                 break;
             case "START":
                 exerciseBlock = <DelayBlock text="Start in: " onStepDone={onStepDone} />;
