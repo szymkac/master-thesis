@@ -1,0 +1,33 @@
+@import'../../../content/commonStyles/variables.scss';
+
+.header-container{
+    height: 50px;
+    border-bottom: 1px solid $tertiary-color;
+    display: flex;
+    align-items: center;
+
+    .menu-button{
+        cursor: pointer;
+        width: 35px;
+        margin: 0 5px;
+        .menu-bar{
+            width: 35px;
+            height: 5px;
+            background-color: $tertiary-color;
+            margin: 6px 0;
+        }
+    }
+    .logo-container{
+        width: calc(100% - 90px);
+        .menu-logo{
+            height: 100%;
+            width: 300px;
+            height: 35px;
+            margin-left: calc(50% - 150px);
+        }
+    }
+    .menu-setting{
+        height: 100%;
+        width: 45px;
+    }
+}

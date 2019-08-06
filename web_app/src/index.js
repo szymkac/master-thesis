@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import App from './app/App';
 import * as serviceWorker from './serviceWorker';
 import Firebase, { FirebaseContext } from './pages/Firebase';
+import './content/commonStyles/index.scss';
 
 
 ReactDOM.render(
