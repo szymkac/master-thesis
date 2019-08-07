@@ -3,6 +3,7 @@ import { ExerciseBlockWrapper } from '../../styled'
 import { RowContainer } from '../../../commonStyled';
 import { ToutchColumn, PresureCircle } from '../../styled/exerciseAnimationItems'
 import TimerBlock from './timerBlock';
+import * as HANDS from '../../../../constants/hands';
 
 const maxForce = 120; //temporary
 
@@ -19,14 +20,14 @@ class PressureBlock extends Component {
     shouldComponentUpdate(nextProps) {
         const { deviceData, hand } = nextProps;
         if (!!deviceData) {
-            this.setColor(this.presure0Ref, hand === 'right' ? deviceData.f[0] : deviceData.f[5]);
+            this.setColor(this.presure0Ref, hand === HANDS.RIGHT ? deviceData.f[0] : deviceData.f[5]);
             this.setColor(this.presure1Ref, deviceData.f[1]);
             this.setColor(this.presure2Ref, deviceData.f[2]);
             this.setColor(this.presure3Ref, deviceData.f[3]);
             this.setColor(this.presure4Ref, deviceData.f[4]);
         }
 
-        const valid = hand === 'right' ? this.validateForce(deviceData.f.slice(0, 5)) :
+        const valid = hand === HANDS.RIGHT ? this.validateForce(deviceData.f.slice(0, 5)) :
             this.validateForce(deviceData.f.slice(1, 6));
 
         if (!this.valid && valid)
@@ -64,7 +65,7 @@ class PressureBlock extends Component {
                 </RowContainer>
                 <RowContainer noBorder height="80%">
 
-                    {hand === 'right' &&
+                    {hand === HANDS.RIGHT &&
                         <ToutchColumn>
                             <PresureCircle ref={this.presure0Ref}>
                             </PresureCircle>
@@ -91,7 +92,7 @@ class PressureBlock extends Component {
                         </PresureCircle>
                     </ToutchColumn>
 
-                    {hand === 'left' &&
+                    {hand === HANDS.LEFT &&
                         <ToutchColumn>
                             <PresureCircle ref={this.presure0Ref}>
                             </PresureCircle>

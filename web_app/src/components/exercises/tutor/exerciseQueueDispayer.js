@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ExerciseBlockDiplayer from './exercisesBlocks/exerciseBlockDiplayer';
+import * as HANDS from '../../../constants/hands';
 
 const succesModel = { customType: "SUCCESS" };
 
@@ -22,13 +23,20 @@ class ExerciseQueueDispayer extends Component {
             switch (nextNode.customType) {
                 case "LOOP":
                     loopIterator = { ...loopIterator, [nextNode.id]: (!!loopIterator[nextNode.id] ? loopIterator[nextNode.id] + 1 : 1) };
-                    currentStepIndex = loopIterator[nextNode.id] > nextNode.options.iterations ? currentStepIndex + 2 : nextNode.jumpTo;
+                    if (loopIterator[nextNode.id] >= nextNode.options.iterations) {
+                        currentStepIndex = currentStepIndex + 2;
+                        showSucces = nextNode.options.showSucces;
+                    }
+                    else {
+                        currentStepIndex = nextNode.jumpTo;
+                        showSucces = currentNode.options.showSucces;
+                    }
                     break;
                 case "SINGPOST":
                     currentStepIndex += 2;
                     break;
                 default:
-                    showSucces = currentNode.customType !== "START" && currentNode.customType !== "DELAY";
+                    showSucces = currentNode.customType !== "START" && currentNode.customType !== "DELAY" && currentNode.options.showSucces;
                     currentStepIndex++;
                     break;
             }
@@ -60,7 +68,7 @@ class ExerciseQueueDispayer extends Component {
 
 ExerciseQueueDispayer.defaultProps = {
     exerciseModel: null,
-    hand: 'right'
+    hand: HANDS.RIGHT
 }
 
 export default ExerciseQueueDispayer;

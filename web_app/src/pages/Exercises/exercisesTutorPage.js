@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { withFirebase } from '../Firebase';
 import { ExercisesTutorNavigation } from './exercisesNavigation';
-import { withAuthorization } from '../Session'
+import { withAuthorization } from '../Session';
+import * as HANDS from '../../constants/hands';
 
 class ExercisesTutorPage extends Component {
     state = {
         loading: false,
         exercises: [],
-        hand: 'right'
+        hand: HANDS.RIGHT
     }
 
     componentDidMount() {

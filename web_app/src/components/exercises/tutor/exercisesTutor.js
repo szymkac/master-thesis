@@ -9,7 +9,7 @@ class ExercisesTutor extends Component {
         loading: false,
         exercise: null,
         deviceConnection: false,
-        deviceData: null
+        deviceData: null,
     }
 
     componentDidMount() {

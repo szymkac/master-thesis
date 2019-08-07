@@ -1,44 +1,32 @@
 import React, { Component } from 'react';
-import { ToutchColumn, AnimMoveCircle } from '../../../styled/exerciseAnimationItems'
+import { ToutchColumn, TouchCircle } from '../../../styled/exerciseAnimationItems'
+import './touchingBlock.scss';
+
 
 class TouchReflexIndicator extends Component {
     animRef = React.createRef()
 
-    onAnimationStart = () => {
-        const { onAnimationStart, key } = this.props;
-        if (typeof onAnimationStart === "function")
-            onAnimationStart(key);
+    run = () => {
+        const el = this.animRef.current;
+        el.classList.add('on');
     }
 
-    onAnimationEnd = () => {
-        const { onAnimationEnd, key } = this.props;
-        if (typeof onAnimationEnd === "function")
-            onAnimationEnd(key);
-    }
+    onTransitionEnd = () => {
+        const el = this.animRef.current;
+        el.classList.remove('on');
 
-    restartAnimation = () => {
-        console.log("im trying")
-        let el = this.animRef.current;
-        el.style.animationIterationCount = 1;
-        el.style.animation = 'none';
-        el.getClientRects();
-        el.style.animation = null;
+        const { onEnd, name } = this.props;
+        onEnd(name);
     }
 
     render() {
         return (
             <ToutchColumn>
-                <AnimMoveCircle center
-                    size="50px"
-                    exercise="TOUCHING"
+                <TouchCircle className="movable"
                     ref={this.animRef}
-                    onAnimationStart={this.onAnimationStart}
-                    onAnimationEnd={this.onAnimationEnd}>
-                </AnimMoveCircle>
-                <AnimMoveCircle center bottom
-                    size="50px">
-                </AnimMoveCircle>
-                <button onClick={this.restartAnimation}></button>
+                    onTransitionEnd={this.onTransitionEnd}>
+                </TouchCircle>
+                <TouchCircle bottom></TouchCircle>
             </ToutchColumn>
         );
     }

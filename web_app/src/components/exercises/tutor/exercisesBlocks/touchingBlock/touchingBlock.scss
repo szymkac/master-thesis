@@ -1,0 +1,10 @@
+.movable{
+    visibility: hidden;
+    top: 0;
+
+    &.on{
+        visibility: visible;
+        transition: top 1s linear;
+        top: calc(100% - 50px);
+    }
+}

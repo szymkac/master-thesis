@@ -73,16 +73,6 @@ const shaking = keyframes`
   }
 `;
 
-const touching = keyframes`
-  0% {
-    top: 0;
-  }
-
-  100% {
-    top: calc(100% - 50px);
-  }
-`;
-
 const getAnimCircleSetting = props => {
   switch (props.exercise) {
     case "LIFTING":
@@ -95,8 +85,6 @@ const getAnimCircleSetting = props => {
       return css` animation: ${rotation} 2s linear infinite;`;
     case "SHAKING":
       return css` animation: ${shaking} 2s linear infinite;`;
-    case "TOUCHING":
-      return css` animation: ${touching} 1s linear 1 forwards;`;
     default:
       return css``;
   }
@@ -111,10 +99,6 @@ const AnimMoveCircle = styled.div`
     margin: ${props => props.center ? '0 auto' : '0'};
     position: relative;
     ${props => getAnimCircleSetting(props)}
-    ${props => props.bottom && css`
-      top: calc(100% - 100px);
-      z-index: 2;
-      `}
 `;
 
 const PresureCircle = styled.div`
@@ -126,10 +110,24 @@ const PresureCircle = styled.div`
     margin: 0 auto;
 `;
 
+const TouchCircle = styled.div`
+    box-sizing: border-box;
+    border: solid black 2px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    position: relative;
+    ${props => props.bottom && css`
+      top: calc(100% - 100px);
+      z-index: 2;
+      `}
+`;
+
 const ToutchColumn = styled.div`
   box-sizing: border-box;
   width: 20%;
   border: solid black 1px;
 `;
 
-export { AnimTable, AnimMoveCircle, ToutchColumn, PresureCircle };
+export { AnimTable, AnimMoveCircle, ToutchColumn, PresureCircle, TouchCircle };
