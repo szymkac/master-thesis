@@ -4,8 +4,12 @@ const getOptionsConfig = exercise => {
     switch (exercise) {
         case "LIFTING":
         case "PUTTING":
-        case "ROTATION":
             return { showSucces: { component: CheckBox, labelText: "Show succes info after done" } };
+        case "ROTATION":
+            return {
+                showSucces: { component: CheckBox, labelText: "Show succes info after done" },
+                threshold: { component: TextBox, labelText: "Rotation threshold deg/s", validation: { min: 160, max: 640 } }
+            };
         case "TOUCHING":
             return {
                 showSucces: { component: CheckBox, labelText: "Show succes info after done" },
@@ -51,8 +55,9 @@ const getOptionsValues = exercise => {
     switch (exercise) {
         case "LIFTING":
         case "PUTTING":
-        case "ROTATION":
             return { showSucces: true };
+        case "ROTATION":
+            return { showSucces: true, threshold: 275 };
         case "TOUCHING":
             return {
                 showSucces: true,

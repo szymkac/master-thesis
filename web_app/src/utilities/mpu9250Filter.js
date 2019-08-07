@@ -15,10 +15,18 @@ const filterAcceleration = data => {
     };
 }
 
+const filterGyro = data => {
+    return {
+        x: data.g[0],
+        y: -data.g[1],
+        z: -data.g[2]
+    };
+}
+
 const filterAll = data => {
     return {
         a: filterAcceleration(data),
-        g: null, //TODO
+        g: filterGyro(data),
         m: null //TODO
     }
 }
@@ -34,6 +42,6 @@ const normalize = toNormalize => {
     }
 }
 
-export { filterAcceleration, filterNormAcceleration }
+export { filterAcceleration, filterNormAcceleration, filterGyro }
 
 export default filterAll;

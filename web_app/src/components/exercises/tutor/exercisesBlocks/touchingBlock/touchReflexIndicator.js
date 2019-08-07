@@ -15,8 +15,8 @@ class TouchReflexIndicator extends Component {
         const el = this.animRef.current;
         el.classList.remove('on');
 
-        const { onEnd, name } = this.props;
-        onEnd(name);
+        const { onEnd } = this.props;
+        onEnd();
     }
 
     render() {

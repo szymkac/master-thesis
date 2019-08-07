@@ -82,7 +82,7 @@ class TouchingBlock extends Component {
         this.selected = [];
 
         if (options.random) {
-
+            //TODO Random selection
         }
         else {
             if (options.thumb) {
@@ -109,7 +109,8 @@ class TouchingBlock extends Component {
     }
 
     onIndicatorEnd = () => {
-        this.finishTime = new Date().getTime();
+        if (this.finishTime === null)
+            this.finishTime = new Date().getTime();
     }
 
     render() {
@@ -117,12 +118,12 @@ class TouchingBlock extends Component {
         return (
             <ExerciseBlockWrapper>
                 <RowContainer noBorder height="100%">
-                    {hand === HANDS.RIGHT && <TouchReflexIndicator name={FINGERS.THUMB} ref={this.thumbRef} onEnd={this.onIndicatorEnd} />}
-                    <TouchReflexIndicator name={FINGERS.INDEX} ref={this.indexRef} onEnd={this.onIndicatorEnd} />
-                    <TouchReflexIndicator name={FINGERS.MIDDLE} ref={this.middleRef} onEnd={this.onIndicatorEnd} />
-                    <TouchReflexIndicator name={FINGERS.RING} ref={this.ringRef} onEnd={this.onIndicatorEnd} />
-                    <TouchReflexIndicator name={FINGERS.LITTLE} ref={this.littleRef} onEnd={this.onIndicatorEnd} />
-                    {hand === HANDS.LEFT && <TouchReflexIndicator name={FINGERS.THUMB} ref={this.thumbRef} onEnd={this.onIndicatorEnd} />}
+                    {hand === HANDS.RIGHT && <TouchReflexIndicator ref={this.thumbRef} onEnd={this.onIndicatorEnd} />}
+                    <TouchReflexIndicator ref={this.indexRef} onEnd={this.onIndicatorEnd} />
+                    <TouchReflexIndicator ref={this.middleRef} onEnd={this.onIndicatorEnd} />
+                    <TouchReflexIndicator ref={this.ringRef} onEnd={this.onIndicatorEnd} />
+                    <TouchReflexIndicator ref={this.littleRef} onEnd={this.onIndicatorEnd} />
+                    {hand === HANDS.LEFT && <TouchReflexIndicator ref={this.thumbRef} onEnd={this.onIndicatorEnd} />}
                 </RowContainer>
             </ExerciseBlockWrapper>
         );

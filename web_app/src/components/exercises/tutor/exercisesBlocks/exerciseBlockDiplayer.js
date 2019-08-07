@@ -16,6 +16,7 @@ class ExerciseBlockDiplayer extends Component {
     render() {
         let exerciseBlock = null;
         const { model, onStepDone } = this.props;
+
         switch (model.customType) {
             case "LIFTING":
                 exerciseBlock = <LiftingBlock {...this.props} key={model.id} />;
