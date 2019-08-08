@@ -10,6 +10,7 @@ boolean configDone = false;
 const byte numChars = 5;
 char receivedChars[numChars];
 boolean newData = false;
+boolean getResponse = false;
 //*******************************************************************
 
 //*******************************************************************
@@ -78,28 +79,29 @@ void setup(){
   delay(2000);
   setupAccel();
   readJsonConfig();
-  //Serial.println(JsonString);
 }
 
 void loop(){
-    if(configDone){
-      colectSensorsData();
-    }
     receiveMessage();
     processNewData();
-    //Serial.println("Send:");
-    int length = JsonString.length() + 1;
-    char ssid[length];
-    JsonString.toCharArray(ssid, length);
-      
-    Serial.write(ssid, length);
+    
+    if(!configDone || getResponse){
+      if(configDone && getResponse){
+        colectSensorsData();
+        getResponse = false;
+      }
+      int length = JsonString.length() + 1;
+      char ssid[length];
+      JsonString.toCharArray(ssid, length);
+      Serial.write(ssid, length);
+    }
 }
 //*******************************************************************
 // SENSORS DATA CONTAINERS
 
 void colectSensorsData(){
   updateAccel();
-    JsonString = "<{\"m\":\"D\",\"f\":[";
+    JsonString = "<{\"f\":[";
     JsonString += readForce(A0);
     JsonString += ",";
     JsonString += readForce(A1);
@@ -153,26 +155,13 @@ void setupAccel(){
         uint8_t a_whoami = 0x00;
         
         m_whoami = isConnectedMPU9250();
-        if (m_whoami)
-        {
-            //Serial.println("MPU9250 is online...");
+        if (m_whoami){
             initMPU9250();
 
             a_whoami = isConnectedAK8963();
-            if (a_whoami)
-            {
+            if (a_whoami){
                 initAK8963(magCalibration);
             }
-            else
-            {
-                //Serial.print("Could not connect to AK8963: 0x");
-                //Serial.println(a_whoami);
-            }
-        }
-        else
-        {
-            //Serial.print("Could not connect to MPU9250: 0x");
-            //Serial.println(m_whoami);
         }
     }
     
@@ -243,16 +232,12 @@ void setupAccel(){
     bool isConnectedMPU9250()
     {
         byte c = readByte(MPU9250_ADDRESS, WHO_AM_I_MPU9250);
-        //Serial.print("MPU9250 WHO AM I = ");
-        //Serial.println(c, HEX);
         return (c == MPU9250_WHOAMI_DEFAULT_VALUE);
     }
 
     bool isConnectedAK8963()
     {
         byte c = readByte(AK8963_ADDRESS, AK8963_WHO_AM_I);
-        //Serial.print("AK8963  WHO AM I = ");
-        //Serial.println(c, HEX);
         return (c == AK8963_WHOAMI_DEFAULT_VALUE);
     }
     
@@ -305,7 +290,6 @@ void setupAccel(){
         Wire.beginTransmission(address);
         Wire.write(subAddress);
         i2c_err_ = Wire.endTransmission(false);
-        if (i2c_err_) pirntI2CError();
         Wire.requestFrom(address, (size_t)1);
         if (Wire.available()) data = Wire.read();
         return data;
@@ -316,7 +300,6 @@ void setupAccel(){
         Wire.beginTransmission(address);
         Wire.write(subAddress);
         i2c_err_ = Wire.endTransmission(false);
-        if (i2c_err_) pirntI2CError();
         uint8_t i = 0;
         Wire.requestFrom(address, count);
         while (Wire.available())
@@ -331,14 +314,6 @@ void setupAccel(){
         Wire.write(subAddress);
         Wire.write(data);
         i2c_err_ = Wire.endTransmission();
-        if (i2c_err_) pirntI2CError();
-    }
-    
-    void pirntI2CError()
-    {
-        if (i2c_err_ == 7) return; // to avoid stickbreaker-i2c branch's error code
-        //Serial.print("I2C ERROR CODE : ");
-        //Serial.println(i2c_err_);
     }
 //*******************************************************************
 
@@ -346,9 +321,8 @@ void setupAccel(){
 // SD DATA FUNCTIONS
 void readJsonConfig(){
   if (SD.begin()){
-    //Serial.println("SD card is ready to use.");
     File file = SD.open("config.txt");
-    //readline
+    //TODO readline
   
     if (file){
       file.close();
@@ -359,8 +333,6 @@ void readJsonConfig(){
     JsonString += ">";
   } 
   else{
-    //errorCode = 1;
-    //Serial.println("SD card initialization failed");
     JsonString = "<{\"m\":\"C\",\"ssid\":\"domeczek-1902\",\"pass\":\"wifi5wZ2rWLd\",\"user\":\"FlWjVDVNGAZ6qzQFbBUaN3RSbtP2\"}>";
   }
 }
@@ -402,12 +374,9 @@ void receiveMessage() {
 
 void processNewData() {
     if (newData == true) {
-        //Serial.print("\nReceive: \n");
-        //Serial.println(receivedChars);
-        //Serial.println("");
         if(strcmp(receivedChars, "1") == 0){
           configDone = true;
-          //Serial.println("Config status: 1");
+          getResponse = true;
         }
         newData = false;
     }

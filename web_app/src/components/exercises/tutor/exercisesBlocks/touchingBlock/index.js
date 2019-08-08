@@ -75,9 +75,9 @@ class TouchingBlock extends Component {
         if (this.validTouches === this.selected.length) {
             //TODO change this later moron :)
             //THIS IS PROPER SOLUTION !!!
-            //if (f.filter(x => x > 5).length === 0) {
+            if (f.filter(x => x > 5).length === 0) {
             //THIS IS TEMPORARY (UNTIL ALL FORCEMETERS WILL BE WORKING RIGHT WAY)
-            if (f[0] < 5) {
+            //if (f[0] < 5) {
                 this.clear();
                 this.props.onStepDone();
             }
@@ -117,6 +117,12 @@ class TouchingBlock extends Component {
                 this.selected.push(nameIndexes[FINGERS.LITTLE]);
         }
 
+        console.log(this.selected)
+        setTimeout(this.runSelected, 50);
+    }
+
+    runSelected = () => {
+        const indexNames = FINGERS_INDEXES_NAMES[this.props.hand];
         this.selected.forEach(s =>
             this[`${indexNames[s]}Ref`].current.run());
     }
