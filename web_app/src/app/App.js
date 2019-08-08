@@ -17,12 +17,12 @@ const App = () => {
     <Router>
       <Layout>
         <Route exact path={ROUTES.LANDING} component={Landing} />
-        <Route path={ROUTES.SIGN_UP} component={Register} />
-        <Route path={ROUTES.SIGN_IN} component={Login} />
-        <Route path={ROUTES.HOME} component={Home} />
-        <Route path={ROUTES.ACCOUNT} component={Account} />
-        <Route path={ROUTES.ADMIN} component={Admin} />
-        <Route path={ROUTES.PASSWORD_FORGET} component={ForgetPassword} />
+        <Route exact path={ROUTES.SIGN_UP} component={Register} />
+        <Route exact path={ROUTES.SIGN_IN} component={Login} />
+        <Route exact path={ROUTES.HOME} component={Home} />
+        <Route exact path={ROUTES.ACCOUNT} component={Account} />
+        <Route exact path={ROUTES.ADMIN} component={Admin} />
+        <Route exact path={ROUTES.PASSWORD_FORGET} component={ForgetPassword} />
 
         <Route exact path={`${ROUTES.EXERCISES}${ROUTES.EXERCISES_LANDING}`} component={ExercisesPage} />
         <Route exact path={`${ROUTES.EXERCISES}${ROUTES.EXERCISES_LANDING}${ROUTES.EXERCISES_EDITOR}`} component={ExercisesEditorPage} />

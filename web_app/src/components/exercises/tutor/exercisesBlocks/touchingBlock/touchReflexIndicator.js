@@ -19,6 +19,10 @@ class TouchReflexIndicator extends Component {
         onEnd();
     }
 
+    setValidColor(valid) {
+        this.animRef.current.style.background = valid ? 'green' : 'red';
+    }
+
     render() {
         return (
             <ToutchColumn>

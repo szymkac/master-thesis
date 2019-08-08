@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { FancyMenuLink } from '../../commonStyled';
 import * as ROUTES from '../../../constants/routes';
 import * as ROLES from '../../../constants/roles';
 import LogoutButton from '../../../pages/Logout'
@@ -13,40 +13,21 @@ const Navigation = ({ authUser, onClick }) => (
 )
 
 const NavigationAuthUser = ({ authUser, onClick }) => (
-    <ul>
-        <li>
-            <Link to={ROUTES.LANDING} onClick={onClick}>Landing</Link>
-        </li>
-        <li>
-            <Link to={ROUTES.HOME} onClick={onClick}>Home</Link>
-        </li>
-        <li>
-            <Link to={ROUTES.ACCOUNT} onClick={onClick}>Account</Link>
-        </li>
-        <li>
-            <Link to={`${ROUTES.EXERCISES}${ROUTES.EXERCISES_LANDING}`} onClick={onClick}>Excercises</Link>
-        </li>
-        {
-            authUser.roles.includes(ROLES.ADMIN) &&
-            <li>
-                <Link to={ROUTES.ADMIN} onClick={onClick}>Admin</Link>
-            </li>
-        }
-        <li>
-            <LogoutButton />
-        </li>
-    </ul>
+    <>
+        <FancyMenuLink exact={true} to={ROUTES.LANDING} onClick={onClick}>Landing</FancyMenuLink>
+        <FancyMenuLink to={ROUTES.HOME} onClick={onClick}>Home</FancyMenuLink>
+        <FancyMenuLink to={ROUTES.ACCOUNT} onClick={onClick}>Account</FancyMenuLink>
+        <FancyMenuLink to={`${ROUTES.EXERCISES}${ROUTES.EXERCISES_LANDING}`} onClick={onClick}>Excercises</FancyMenuLink>
+        {authUser.roles.includes(ROLES.ADMIN) && <FancyMenuLink to={ROUTES.ADMIN} onClick={onClick}>Admin</FancyMenuLink>}
+        <LogoutButton onClick={onClick} />
+    </>
 );
 
 const NavigationNoAuthUser = ({ onClick }) => (
-    <ul>
-        <li>
-            <Link to={ROUTES.SIGN_IN} onClick={onClick}>Login</Link>
-        </li>
-        <li>
-            <Link to={ROUTES.LANDING} onClick={onClick}>Landing</Link>
-        </li>
-    </ul>
+    <>
+        <FancyMenuLink exact={true} to={ROUTES.LANDING} onClick={onClick}>Landing</FancyMenuLink>
+        <FancyMenuLink to={ROUTES.SIGN_IN} onClick={onClick}>Login</FancyMenuLink>
+    </>
 );
 
 export default Navigation;

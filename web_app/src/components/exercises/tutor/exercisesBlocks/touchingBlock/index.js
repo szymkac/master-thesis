@@ -44,21 +44,31 @@ class TouchingBlock extends Component {
         const { deviceData, hand } = nextProps;
         const indexNames = FINGERS_INDEXES_NAMES[hand];
         const time = new Date().getTime();
-        console.log(deviceData.f[0])
+
         Object.keys(indexNames).forEach(k => {
             if (deviceData.f[k] > 5 && this.touchTimes[indexNames[k]] === null) {
                 this.touchTimes[indexNames[k]] = time;
 
                 if (this.selected.includes(parseInt(k)))
-                    this.validTouches++;
+                    this.setValidTouch(indexNames[k]);
                 else
-                    this.unvalidTouches++;
+                    this.setUnvalidTouch(indexNames[k]);
             }
         });
 
         this.tryFinish(deviceData.f);
 
         return false;
+    }
+
+    setValidTouch(finger) {
+        this.validTouches++;
+        this[`${finger}Ref`].current.setValidColor(true);
+    }
+
+    setUnvalidTouch(finger) {
+        this.unvalidTouches++;
+        this[`${finger}Ref`].current.setValidColor(false);
     }
 
     tryFinish = (f) => {
@@ -78,34 +88,37 @@ class TouchingBlock extends Component {
         this.runned = true;
         const { hand } = this.props;
         const { options } = this.props.model;
-        const nameIndexes = FINGERS_NAMES_INDEXES[hand];
         this.selected = [];
 
+        const indexNames = FINGERS_INDEXES_NAMES[hand];
+
         if (options.random) {
-            //TODO Random selection
+            const randomAmount = Math.floor(Math.random() * options.randomMax) + 1;
+            const fingerIndexes = Object.keys(indexNames);
+            for (let i = 0; i < randomAmount; i++) {
+                const randomKey = parseInt(fingerIndexes[Math.floor(Math.random() * fingerIndexes.length)]);
+                if (!this.selected.includes(randomKey))
+                    this.selected.push(randomKey);
+                else
+                    i--;
+            }
         }
         else {
-            if (options.thumb) {
-                this.thumbRef.current.run();
+            const nameIndexes = FINGERS_NAMES_INDEXES[hand];
+            if (options.thumb)
                 this.selected.push(nameIndexes[FINGERS.THUMB]);
-            }
-            if (options.index) {
-                this.indexRef.current.run();
+            if (options.index)
                 this.selected.push(nameIndexes[FINGERS.INDEX]);
-            }
-            if (options.middle) {
-                this.middleRef.current.run();
+            if (options.middle)
                 this.selected.push(nameIndexes[FINGERS.MIDDLE]);
-            }
-            if (options.ring) {
-                this.ringRef.current.run();
+            if (options.ring)
                 this.selected.push(nameIndexes[FINGERS.RING]);
-            }
-            if (options.little) {
-                this.littleRef.current.run();
+            if (options.little)
                 this.selected.push(nameIndexes[FINGERS.LITTLE]);
-            }
         }
+
+        this.selected.forEach(s =>
+            this[`${indexNames[s]}Ref`].current.run());
     }
 
     onIndicatorEnd = () => {

@@ -1,11 +1,16 @@
 import React from 'react';
+import { FancyButton } from '../../components/commonStyled';
 
 import { withFirebase } from '../Firebase';
 
-const SignOutButton = ({ firebase }) => (
-  <button type="button" onClick={firebase.doSignOut}>
+const SignOutButton = ({ firebase, onClick }) => (
+  <FancyButton type="button" onClick={() => {
+    firebase.doSignOut();
+    if (typeof onClick === "function")
+      onClick();
+  }}>
     Sign Out
-  </button>
+  </FancyButton>
 );
 
 export default withFirebase(SignOutButton);
