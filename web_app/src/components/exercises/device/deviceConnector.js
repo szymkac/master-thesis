@@ -64,21 +64,30 @@ class DeviceConnector extends Component {
     }
 
     closeDeviceSocket = () => {
-        if (!!this.socket) {
+        if (!!this.socket && this.state.socketOpen) {
             this.socket.close();
             this.socket = null;
-            if (typeof this.onDeviceConnectionChange === "function")
-                this.onDeviceConnectionChange(false);
+            if (typeof this.props.onDeviceConnectionChange === "function")
+                this.props.onDeviceConnectionChange(false);
         }
     }
 
+    startWithoutDevice = () => {
+        console.log("try no connect");
+        if (typeof this.props.onDeviceConnectionChange === "function")
+            this.props.onDeviceConnectionChange(true);
+    }
+
     render() {
+        const { userIsAdmin } = this.props;
         const { socketOpen } = this.state;
+
         return (
             <div>
                 <h4>Device IP: {this.deviceIP || "no IP"}</h4>
                 {socketOpen ? "Connected" : "No connected"}
                 <button onClick={this.openDeviceSocket}>Try connect</button>
+                {userIsAdmin && <button onClick={this.startWithoutDevice} >Start without device</button>}
             </div>
         );
     }

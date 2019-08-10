@@ -50,7 +50,7 @@ class ExerciseQueueDispayer extends Component {
     }
 
     render() {
-        const { exerciseModel, deviceData, hand } = this.props;
+        const { exerciseModel, deviceData, hand, userIsAdmin } = this.props;
         const { currentStepIndex, showSucces } = this.state;
         return (
             <div>
@@ -60,7 +60,7 @@ class ExerciseQueueDispayer extends Component {
                     onStepDone={this.onStepDone}
                     hand={hand} />
                 Step {currentStepIndex + 1} of {exerciseModel.exerciseQueue.length}
-                <button onClick={this.onStepDone}>Next step</button>
+                {userIsAdmin && <button onClick={this.onStepDone}>Next step</button>}
             </div>
         );
     }

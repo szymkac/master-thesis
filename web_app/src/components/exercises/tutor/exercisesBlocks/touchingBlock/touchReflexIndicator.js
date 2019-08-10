@@ -4,9 +4,12 @@ import './touchingBlock.scss';
 
 
 class TouchReflexIndicator extends Component {
-    animRef = React.createRef()
+    animRef = React.createRef();
+    staticRef = React.createRef();
 
     run = () => {
+        this.staticRef.current.style.background = 'white';
+        this.staticRef.current.style.border = "5px solid yellow";
         const el = this.animRef.current;
         el.classList.add('on');
     }
@@ -20,7 +23,8 @@ class TouchReflexIndicator extends Component {
     }
 
     setValidColor(valid) {
-        this.animRef.current.style.background = valid ? 'green' : 'red';
+        this.staticRef.current.style.background = valid ? 'green' : 'red';
+        this.staticRef.current.style.border = "2px solid black";
     }
 
     render() {
@@ -30,7 +34,10 @@ class TouchReflexIndicator extends Component {
                     ref={this.animRef}
                     onTransitionEnd={this.onTransitionEnd}>
                 </TouchCircle>
-                <TouchCircle bottom></TouchCircle>
+                <TouchCircle
+                    bottom
+                    ref={this.staticRef}>
+                </TouchCircle>
             </ToutchColumn>
         );
     }
