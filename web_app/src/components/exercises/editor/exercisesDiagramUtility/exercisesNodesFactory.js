@@ -11,13 +11,13 @@ class ExercisesNodesFactory {
         switch (exercise.type) {
             case "LIFTING":
                 node = this.getDefaultNode(exercise, true, true, true);
-                node.addCustomPort("inAir", false, "IN_AIR_START")
-                node.addCustomPort("onFloor", true, "ON_FLOOR_END")
+                //node.addCustomPort("inAir", false, "IN_AIR_START")
+                //node.addCustomPort("onFloor", true, "ON_FLOOR_END")
                 break;
             case "PUTTING":
                 node = this.getDefaultNode(exercise, true, true, true);
-                node.addCustomPort("inAir", true, "IN_AIR_END")
-                node.addCustomPort("onFloor", false, "ON_FLOOR_START")
+                //node.addCustomPort("inAir", true, "IN_AIR_END")
+                //node.addCustomPort("onFloor", false, "ON_FLOOR_START")
                 break;
             case "SHIFTING":
             case "ROTATION":

@@ -5,7 +5,7 @@
 
 //*******************************************************************
 // SERIAL DATA CONTAINER
-const byte numChars = 640;
+const byte numChars = 128;
 char receivedChars[numChars];
 boolean newData = false;
 boolean responseSend = true;
@@ -24,17 +24,14 @@ void setup()
 {
   Serial.begin(9600);
   Serial.println("Goodnight moon!");
-  pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void loop()
 {
   webSocket.loop();
-  digitalWrite(LED_BUILTIN, LOW);
   receiveMessage();
   processNewData();
   if(!responseSend){
-    digitalWrite(LED_BUILTIN, HIGH);  
     Serial.println("Send:");
     Serial.write("<1>");
     responseSend = true;
@@ -130,10 +127,7 @@ void processNewData() {
         else{
           Serial.print("\SEND TO SOCKET: \n");
           String message = String(receivedChars);
-          byte plain[message.length()];
-          message.getBytes(plain, message.length());
-          String newMessage = String((char*)plain);
-          webSocket.broadcastTXT(newMessage);
+          webSocket.broadcastTXT(message);
         }
         newData = false;
         responseSend = false;

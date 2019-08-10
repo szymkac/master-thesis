@@ -19,7 +19,7 @@ const getOptionsConfig = exercise => {
                 ring: { component: CheckBox, labelText: "Touth with ring finger" },
                 little: { component: CheckBox, labelText: "Touth with little finger" },
                 random: { component: CheckBox, labelText: "Randomly select fingers to touch" },
-                randomMax: { component: TextBox, labelText: "Amount of fingers to select randomly" } //TODO disabled finger selection on random and enalbled randomMax (Maybe by extra onChange?)
+                randomMax: { component: TextBox, labelText: "Randomly amount of fingers to select" } //TODO disabled finger selection on random and enalbled randomMax (Maybe by extra onChange?)
             };
         case "SHAKING":
             return {

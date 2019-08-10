@@ -3,6 +3,7 @@ import { withFirebase } from '../../../pages/Firebase/index';
 import ExerciseModel from '../../../models/exerciseModel';
 import ExerciseQueueDispayer from './exerciseQueueDispayer'
 import DeviceConnector from '../device/deviceConnector';
+import DeviceData from '../../../models/deviceData';
 import * as ROLES from '../../../constants/roles';
 
 class ExercisesTutor extends Component {
@@ -42,8 +43,10 @@ class ExercisesTutor extends Component {
     }
 
     onDeviceData = e => {
-        const data = JSON.parse(e.data);
-        this.setState({ deviceData: data })
+        console.log(e.data);
+        const data = new DeviceData(e.data);
+        if (data.valid)
+            this.setState({ deviceData: data })
     }
 
     render() {

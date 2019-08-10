@@ -87,6 +87,8 @@ void loop(){
     
     if(!configDone || getResponse){
       if(configDone && getResponse){
+        Serial.println("RESPONSE");
+        delay(50);
         colectSensorsData();
         getResponse = false;
       }
@@ -94,6 +96,7 @@ void loop(){
       char ssid[length];
       JsonString.toCharArray(ssid, length);
       Serial.write(ssid, length);
+      Serial.println("SEND");
     }
 }
 //*******************************************************************
@@ -101,7 +104,7 @@ void loop(){
 
 void colectSensorsData(){
   updateAccel();
-    JsonString = "<{\"f\":[";
+    JsonString = "<";
     JsonString += readForce(A0);
     JsonString += ",";
     JsonString += readForce(A1);
@@ -113,27 +116,27 @@ void colectSensorsData(){
     JsonString += readForce(A6);
     JsonString += ",";
     JsonString += readForce(A7);
-    JsonString += "],\"fl\":";
+    JsonString += ",";
     JsonString += readFloorSensor();
-    JsonString += ",\"a\":[";
+    JsonString += ",";
     JsonString += a[0];
     JsonString += ",";
     JsonString += a[1];
     JsonString += ",";
     JsonString += a[2];
-    JsonString += "],\"g\":[";
+    JsonString += ",";
     JsonString += g[0];
     JsonString += ",";
     JsonString += g[1];
     JsonString += ",";
     JsonString += g[2];
-    JsonString += "],\"m\":[";
+    JsonString += ",";
     JsonString += m[0];
     JsonString += ",";
     JsonString += m[1];
     JsonString += ",";
     JsonString += m[2];
-    JsonString += "]}>";
+    JsonString += ">";
 }
 
 uint8_t readForce(uint8_t SensorPin){

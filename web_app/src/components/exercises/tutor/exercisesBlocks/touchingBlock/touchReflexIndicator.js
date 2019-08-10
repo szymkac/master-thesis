@@ -8,7 +8,6 @@ class TouchReflexIndicator extends Component {
     staticRef = React.createRef();
 
     run = () => {
-        this.staticRef.current.style.background = 'white';
         this.staticRef.current.style.border = "5px solid yellow";
         const el = this.animRef.current;
         el.classList.add('on');
@@ -22,9 +21,13 @@ class TouchReflexIndicator extends Component {
         onEnd();
     }
 
-    setValidColor(valid) {
+    setValidColor = valid => {
         this.staticRef.current.style.background = valid ? 'green' : 'red';
         this.staticRef.current.style.border = "2px solid black";
+    }
+
+    clearValidColor = () => {
+        this.staticRef.current.style.background = 'white';
     }
 
     render() {

@@ -11,12 +11,16 @@ class ExercisesDiagramEngine {
         this.diagramEngine = new DiagramEngine();
         this.diagramEngine.installDefaultFactories();
 
-        this.diagramEngine.registerPortFactory(new SimplePortFactory("custom", config => new CustomPortModel()));
+        this.diagramEngine.registerPortFactory(new SimplePortFactory("custom", this.portFunc));
         this.diagramEngine.registerNodeFactory(new CustomNodeFactory());
 
         this.setEmptyModel();
 
         this.maxNumberPointsPerLink = 0;
+    }
+
+    portFunc = config => {
+        return new CustomPortModel();
     }
 
     serializeAndClearModel = () => {
