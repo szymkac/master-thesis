@@ -77,12 +77,12 @@ void setup(){
   //INITS!!
   Wire.begin();
   delay(2000);
-  setupAccel();
+  initAccelGyro();
   readJsonConfig();
 }
 
 void loop(){
-    receiveMessage();
+  receiveMessage();
     processNewData();
     
     if(!configDone || getResponse){
@@ -153,7 +153,7 @@ uint8_t readFloorSensor(){
 
 //*******************************************************************
 // ACCEL DATA CONTAINERS
-void setupAccel(){
+void initAccelGyro(){
         uint8_t m_whoami = 0x00;
         uint8_t a_whoami = 0x00;
         
@@ -165,6 +165,12 @@ void setupAccel(){
             if (a_whoami){
                 initAK8963(magCalibration);
             }
+            else{
+              Serial.println("error 2");
+            }
+        }
+        else{
+          Serial.println("error 1");
         }
     }
     
@@ -336,7 +342,7 @@ void readJsonConfig(){
     JsonString += ">";
   } 
   else{
-    JsonString = "<{\"m\":\"C\",\"ssid\":\"domeczek-1902\",\"pass\":\"wifi5wZ2rWLd\",\"user\":\"FlWjVDVNGAZ6qzQFbBUaN3RSbtP2\"}>";
+    JsonString = "<{\"m\":\"C\",\"ssid\":\"Lucky\",\"pass\":\"123456789\",\"user\":\"FlWjVDVNGAZ6qzQFbBUaN3RSbtP2\"}>";
   }
 }
   
