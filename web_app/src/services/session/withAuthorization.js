@@ -1,5 +1,5 @@
 import React from 'react';
-import { withFirebase } from '..//Firebase';
+import { withFirebase } from '../firebase';
 import { withRouter } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes'
 import AuthUserContext from './context';
@@ -12,7 +12,6 @@ const withAuthorization = condition => Component => {
             this.listener = this.props.firebase.onAuthUserListener(
                 authUser => {
                     if (!condition(authUser)) {
-                        console.log(authUser);
                         this.props.history.push(ROUTES.HOME);
                     }
                 },

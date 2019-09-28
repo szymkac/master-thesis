@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
-import { RegisterLink } from '../Register'
-import { withFirebase } from '../Firebase';
+import { SignUpLink } from '../signUp'
+import { withFirebase } from '../../services/firebase';
 import { compose } from 'recompose';
-import { PasswordForgetLink } from '../ForgetPassword'
+import { ForgetPasswordLink } from '../forgetPassword'
+import { Page } from '../../components/commonStyled';
 
 const INITIAL_STATE = {
     email: '',
@@ -12,16 +13,16 @@ const INITIAL_STATE = {
     error: null,
 };
 
-const LoginPage = () => (
-    <div>
+const SignInPage = () => (
+    <Page>
         <h1>Login</h1>
-        <LoginComponent />
-        <RegisterLink />
-        <PasswordForgetLink />
-    </div>
+        <SignInForm />
+        <SignUpLink />
+        <ForgetPasswordLink />
+    </Page>
 );
 
-class LoginComponentBase extends Component {
+class SignInFormBase extends Component {
     state = {
         ...INITIAL_STATE
     }
@@ -72,10 +73,10 @@ class LoginComponentBase extends Component {
     }
 }
 
-const LoginComponent = compose(
+const SignInForm = compose(
     withRouter,
     withFirebase
-)(LoginComponentBase);
+)(SignInFormBase);
 
-export default LoginPage;
-export { LoginComponent }
+export default SignInPage;
+export { SignInForm }

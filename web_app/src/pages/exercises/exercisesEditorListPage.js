@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { withFirebase } from '../Firebase';
+import { withFirebase } from '../../services/firebase';
 import { ExercisesEditorNavigation } from './exercisesNavigation';
+import { Page } from '../../components/commonStyled';
+import { withAuthorization, isUserOnline } from '../../services/session';
 
-class ExercisesEditorPage extends Component {
+class ExercisesEditorListPage extends Component {
     state = {
         loading: false,
         exercises: []
@@ -27,16 +29,14 @@ class ExercisesEditorPage extends Component {
     render() {
         const { match } = this.props;
         const { exercises, loading } = this.state;
-
         return (
-            <div>
+            <Page>
                 <h1>Exercises Page</h1>
                 {loading && <div>Loading...</div>}
                 {!!exercises && <ExercisesEditorNavigation match={match} exercises={exercises} />}
-            </div>
+            </Page>
         );
     }
 }
 
-
-export default withFirebase(ExercisesEditorPage);
+export default withFirebase(withAuthorization(isUserOnline)(ExercisesEditorListPage));

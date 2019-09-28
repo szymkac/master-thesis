@@ -73,7 +73,7 @@ const float mRes {10. * 4912. / 32760.0};
 
 void setup(){
   Serial.begin(9600);
-  
+  Serial.println("setup");
   //INITS!!
   Wire.begin();
   delay(2000);
@@ -82,22 +82,9 @@ void setup(){
 }
 
 void loop(){
-  receiveMessage();
-    processNewData();
-    
-    if(!configDone || getResponse){
-      if(configDone && getResponse){
-        Serial.println("RESPONSE");
-        delay(50);
+
         colectSensorsData();
-        getResponse = false;
-      }
-      int length = JsonString.length() + 1;
-      char ssid[length];
-      JsonString.toCharArray(ssid, length);
-      Serial.write(ssid, length);
-      Serial.println("SEND");
-    }
+        Serial.println(JsonString);
 }
 //*******************************************************************
 // SENSORS DATA CONTAINERS
@@ -156,7 +143,7 @@ uint8_t readFloorSensor(){
 void initAccelGyro(){
         uint8_t m_whoami = 0x00;
         uint8_t a_whoami = 0x00;
-        
+
         m_whoami = isConnectedMPU9250();
         if (m_whoami){
             initMPU9250();

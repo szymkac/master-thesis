@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withFirebase } from '../../../pages/Firebase/index';
+import { withFirebase } from '../../../services/firebase/index';
 import ExerciseModel from '../../../models/exerciseModel';
 import ExerciseQueueDispayer from './exerciseQueueDispayer'
 import DeviceConnector from '../device/deviceConnector';

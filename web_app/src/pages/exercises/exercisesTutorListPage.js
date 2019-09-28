@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { withFirebase } from '../Firebase';
 import { ExercisesTutorNavigation } from './exercisesNavigation';
-import { withAuthorization } from '../Session';
+import { withFirebase } from '../../services/firebase';
+import { withAuthorization, isUserOnline } from '../../services/session';
 import * as HANDS from '../../constants/hands';
+import { Page } from '../../components/commonStyled';
 
-class ExercisesTutorPage extends Component {
+class ExercisesTutorListPage extends Component {
     state = {
         loading: false,
         exercises: [],
@@ -32,16 +33,13 @@ class ExercisesTutorPage extends Component {
         const { exercises, loading, hand } = this.state;
 
         return (
-            <div>
+            <Page>
                 <h1>Exercises Page</h1>
                 {loading && <div>Loading...</div>}
                 {!!exercises && <ExercisesTutorNavigation authUser={authUser} match={match} exercises={exercises} hand={hand} />}
-            </div>
+            </Page>
         );
     }
 }
 
-const condition = authUser => !!authUser;
-
-
-export default withAuthorization(condition)(withFirebase(ExercisesTutorPage));
+export default withAuthorization(isUserOnline)(withFirebase(ExercisesTutorListPage));

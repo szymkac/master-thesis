@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
-import { withFirebase } from '../../../pages/Firebase/index';
+import { withFirebase } from '../../../services/firebase/index';
 import ExcercisesDiagramWidget from './exercisesDiagramWidget';
 import { TextBox, TextArea } from '../../common';
 import { RowContainer } from '../../commonStyled';

@@ -3,6 +3,7 @@ import RowContainer from './rowContainer'
 import WrapContainer from './wrapContainer'
 import FillContainer from './fillContainer'
 import SquareContainer from './squareContainer'
+import Page from './page';
 import FancyMenuLink from './fancy/fancyMenuLink';
 import FancyButton from './fancy/fancyButton';
 
@@ -12,6 +13,7 @@ export {
     WrapContainer,
     FillContainer,
     SquareContainer,
+    Page,
     FancyMenuLink,
     FancyButton
 }

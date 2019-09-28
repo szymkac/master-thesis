@@ -21,6 +21,8 @@ const FancyButton = styled.button`
     background: transparent;
     border: 0;
     width: 100%;
+    outline:none;
+
     ${fancyButtonBase}
 
     &.active {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withFirebase } from '../../../pages/Firebase';
+import { withFirebase } from '../../../services/firebase';
 
 class DeviceConnector extends Component {
     socket = null;

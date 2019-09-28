@@ -3,6 +3,7 @@ import './layout.scss';
 import Menu from './menu';
 import Content from './content';
 
+
 class Layout extends Component {
     content = React.createRef();
     onMenuOpenClick = () => {
@@ -26,5 +27,6 @@ class Layout extends Component {
       );
     }
   }
-  
-  export default Layout;
+
+
+export default Layout;

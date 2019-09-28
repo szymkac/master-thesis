@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withFirebase } from '../Firebase';
+import { withFirebase } from '../../services/firebase';
 
 const INITIAL_STATE = {
   passwordOne: '',

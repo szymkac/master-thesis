@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
-import { withFirebase } from '../Firebase';
+import { withFirebase } from '../../services/firebase';
 import { compose } from 'recompose';
-
+import { Page } from '../../components/commonStyled';
 
 const INITIAL_STATE = {
   username: '',
@@ -15,14 +15,14 @@ const INITIAL_STATE = {
   error: null,
 };
 
-const RegisterPage = () => (
-  <div>
+const SignUpPage = () => (
+  <Page>
     <h1>Register</h1>
-    <RegisterComponent />
-  </div>
+    <SignUpForm />
+  </Page>
 );
 
-class RegisterComponentBase extends Component {
+class SignUpFormBase extends Component {
   state = {
     ...INITIAL_STATE
   }
@@ -120,17 +120,17 @@ class RegisterComponentBase extends Component {
   }
 }
 
-const RegisterComponent = compose(
+const SignUpForm = compose(
   withRouter,
   withFirebase
-)(RegisterComponentBase);
+)(SignUpFormBase);
 
-const RegisterLink = () => (
+const SignUpLink = () => (
   <p>
     Don't have an account?
         <Link to={ROUTES.SIGN_UP}>Create an account</Link>
   </p>
 )
 
-export default RegisterPage;
-export { RegisterLink, RegisterComponent }
+export default SignUpPage;
+export { SignUpLink, SignUpForm }
