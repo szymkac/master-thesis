@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
-import { SignUpLink } from '../signUp'
+import { SignUpLink } from '../signUpPage'
 import { withFirebase } from '../../services/firebase';
 import { compose } from 'recompose';
-import { ForgetPasswordLink } from '../forgetPassword'
+import { ForgetPasswordLink } from '../forgetPasswordPage'
 import { Page } from '../../components/commonStyled';
 
 const INITIAL_STATE = {

@@ -1,9 +1,9 @@
-import AccountPage from './account';
-import AdminPage from './admin';
-import ForgetPasswordPage from './forgetPassword';
-import HomePage from './home';
-import SignInPage from './signIn';
-import SignUpPage from './signUp';
+import AccountPage from './accountPage';
+import AdminPage from './adminPage';
+import ForgetPasswordPage from './forgetPasswordPage';
+import HomePage from './homePage';
+import SignInPage from './signInPage';
+import SignUpPage from './signUpPage';
 import ExercisesPage, { ExercisesEditorListPage, ExercisesTutorListPage, ExercisesEditorPage, ExercisesTutorPage } from './exercises';
 
 export{
