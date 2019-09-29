@@ -1,9 +1,9 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { fancyButtonBase } from './fancyButton';
+import { fancyMenuButtonBase } from './fancyMenuButton';
 
 const FancyMenuLink = styled(NavLink)`
-    ${fancyButtonBase}
+    ${fancyMenuButtonBase}
 
     &.active {
       border-top: solid 5px white;

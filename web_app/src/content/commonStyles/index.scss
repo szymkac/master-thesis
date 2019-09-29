@@ -9,12 +9,16 @@ body,
   width: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+    sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#root{
+.root{
   background-color: $background-color;
   overflow:auto;
+}
+
+h1,h2,h3,h4,h5,h6{
+  margin: 0;
 }

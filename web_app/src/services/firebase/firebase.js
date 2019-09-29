@@ -81,6 +81,7 @@ class Firebase {
         return this.exercise();
     }
 
+    removeExercise = uid => this.exercises().child(uid).remove();
 }
 
 export default Firebase;

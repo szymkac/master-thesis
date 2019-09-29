@@ -8,6 +8,7 @@ const RowContainer = styled.div`
     min-width: ${props => props.minWidth || 'auto'};
     max-width: ${props => props.maxWidth || 'auto'};
     flex-grow: ${props => props.grow ? props.grow : (props.width || props.minWidth || props.maxWidth) ? 0 : 1};
+    ${props => !!props.wrapping && 'flex-wrap: wrap;'}
     height: ${props => props.height || 'auto'};
     justify-content: ${props => props.center ? 'center' : 'flex-start'};
 `;

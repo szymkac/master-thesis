@@ -4,7 +4,7 @@ import ForgetPasswordPage from './forgetPasswordPage';
 import HomePage from './homePage';
 import SignInPage from './signInPage';
 import SignUpPage from './signUpPage';
-import ExercisesPage, { ExercisesEditorListPage, ExercisesTutorListPage, ExercisesEditorPage, ExercisesTutorPage } from './exercises';
+import ExercisesPage, { ExercisesEditorListPage, ExercisesTutorListPage, ExercisesEditorPage, ExercisesTutorPage } from './exercisesPage';
 
 export{
     AccountPage,

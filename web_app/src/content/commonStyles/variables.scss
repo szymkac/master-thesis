@@ -2,3 +2,10 @@ $primary-color: #ffffff;
 $secondary-color: #48a770;
 $tertiary-color: #000000;
 $background-color: #383838;
+
+:export {
+    primarycolor: $primary-color;
+    secondarycolor: $secondary-color;
+    tertiarycolor: $tertiary-color;
+    backgroundcolor: $background-color;
+  }

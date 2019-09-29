@@ -1,35 +1,34 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
+import variables from '../../../content/commonStyles/variables.scss';
+import { borderCss } from './fancyBase';
 
 const fancyButtonBase = css`
     box-sizing: border-box;
-    height: 60px;
+    height: 35px;
+    width: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: ${variables.secondarycolor};
     text-decoration: none;
-    font-size: large;
     font-weight: bold;
+    border: ${borderCss};
+    border-radius: 20px;
+    margin: 5px;
+    font-size: 1em;
+    font-family: inherit;
     
     &:hover {
-        border-top: dashed 5px white;
-        border-bottom: dashed 5px white;
+        background: ${variables.secondarycolor};
+        color: white;
     }
 `;
 
 const FancyButton = styled.button`
     background: transparent;
-    border: 0;
-    width: 100%;
-    outline:none;
+    outline: none;
 
     ${fancyButtonBase}
-
-    &.active {
-        border-top: solid 5px white;
-        border-bottom: solid 5px white;
-    }
-
 `;
 
 export default FancyButton;
