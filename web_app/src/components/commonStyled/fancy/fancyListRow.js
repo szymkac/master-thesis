@@ -7,11 +7,11 @@ import FancyButtonLink from './fancyButtonLink';
 const FancyListRow = styled.div`
     display: flex;
     flex-direction: row;
-    border-left: ${borderCss};
-    border-right: ${borderCss};
-    border-bottom: ${borderCss};
+    border-left: ${borderCss}
+    border-right: ${borderCss}
+    border-bottom: ${borderCss}
     &:first-child{
-        border-top: ${borderCss};
+        border-top: ${borderCss}
         ${props => props.noHeader !== false && css`
             background: ${variables.secondarycolor};
             border-top-left-radius: 25px;
@@ -32,7 +32,7 @@ const FancyListRow = styled.div`
 const FancyListCell = styled.div`
     display: flex;
     padding: 10px;
-    border-right: ${borderCss};
+    border-right: ${borderCss}
     flex-grow: 1;
     flex-shrink: 1;
     flex-wrap: wrap;

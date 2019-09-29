@@ -4,7 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { withFirebase } from '../../../services/firebase/index';
 import ExcercisesDiagramWidget from './exercisesDiagramWidget';
 import { TextBox, TextArea } from '../../common';
-import { RowContainer } from '../../commonStyled';
+import { RowContainer, FancyButton } from '../../commonStyled';
+import { ExercisesEditorWraper } from '../styled';
 import * as ROUTES from '../../../constants/routes';
 
 
@@ -77,15 +78,15 @@ class ExercisesEditor extends Component {
         const { exercise, loading, name, description } = this.state;
 
         return (
-            <div>
+            <ExercisesEditorWraper>
                 {loading && <div>Loading...</div>}
-                <RowContainer>
+                <RowContainer noBorder>
                     <TextBox propertyName="name" labelText="Exercise name" value={name} onChange={this.onValueChange} />
                     <TextArea propertyName="description" labelText="Exercise description" value={description} onChange={this.onValueChange} />
-                    <button onClick={this.onSave}>Save</button>
+                    <FancyButton onClick={this.onSave}>Save</FancyButton>
                 </RowContainer>
                 {match.params.id === ROUTES.EXERCISES_CREATOR || !!exercise ? <ExcercisesDiagramWidget ref={this.exerciseDiagramRef} exercise={exercise} /> : null}
-            </div>
+            </ExercisesEditorWraper>
         )
     }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FancyLabel, FancyTextArea, Row } from '../commonStyled';
 
 class TextArea extends Component {
     constructor(props) {
@@ -30,17 +31,21 @@ class TextArea extends Component {
     }
 
     render() {
-        const { labelText, propertyName, value } = this.props;
+        const { labelText, propertyName, value, smallLabel } = this.props;
         const input = !!propertyName ?
-            <textarea type="text" ref={this.inputRef} defaultValue={value} onChange={this.onUncontroledChange} />
-            : <textarea type="text" value={this.state.value} onChange={this.onControledChange} />;
+            <FancyTextArea ref={this.inputRef} defaultValue={value} onChange={this.onUncontroledChange} />
+            : <FancyTextArea value={this.state.value} onChange={this.onControledChange} />;
 
         if (!!labelText)
             return (
-                <label>
-                    {labelText}
-                    {input}
-                </label>
+                <FancyLabel smallLabel={smallLabel}>
+                    <Row>
+                        {labelText}
+                    </Row>
+                    <Row>
+                        {input}
+                    </Row>
+                </FancyLabel>
             );
         else
             return input;

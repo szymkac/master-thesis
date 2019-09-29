@@ -53,7 +53,8 @@ class ExerciseStepOptions extends Component {
                             propertyName={key}
                             labelText={keyConfig.labelText}
                             value={this.state[key]}
-                            onChange={this.onOptionChange} />
+                            onChange={this.onOptionChange}
+                            smallLabel={true} />
                     })
                 }
             </div>

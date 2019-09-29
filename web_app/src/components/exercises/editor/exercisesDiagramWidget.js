@@ -104,18 +104,18 @@ class ExcercisesDiagramWidget extends Component {
             (!!selectedNode ? selectedNode.options : null);
 
         return (
-            <RowContainer>
-                <ColumnContainer width="200px">
+            <RowContainer noBorder>
+                <ColumnContainer width="200px" noBorder>
                     {exercises.map(x => <DiagramExerciseNode key={x} onDragStart={this.onDragStart} exercise={EXERCISES[x]} />)}
                 </ColumnContainer>
 
-                <ColumnContainer>
+                <ColumnContainer noBorder>
                     <ExercisesDiagramWrapper onDrop={this.onDrop} onDragOver={e => e.preventDefault()}>
                         <ExercisesDiagram exercisesDiagramEngine={this.exercisesDiagramEngine} />
                     </ExercisesDiagramWrapper>
                 </ColumnContainer>
 
-                <ColumnContainer width="200px">
+                <ColumnContainer center width="200px" padding="5px">
                     {!!optionsOfSelected ? <ExerciseStepOptions ref={this.optionsRef} node={selectedNode} optionsValues={optionsOfSelected} /> : "Select an exercise node to show options."}
                 </ColumnContainer>
             </RowContainer>

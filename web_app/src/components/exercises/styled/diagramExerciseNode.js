@@ -24,7 +24,7 @@ const DiagramExerciseNodeOuter = styled.div`
     border-radius: 5px;
     background: ${props => props.backgroundColor || "black"};
     height: 40px;
-    margin: 1px 2px;
+    margin: 1px 5px;
 `;
 
 const DiagramExerciseNode = ({exercise, onDragStart}) => (

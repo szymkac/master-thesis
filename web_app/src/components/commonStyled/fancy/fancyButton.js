@@ -12,7 +12,7 @@ const fancyButtonBase = css`
     color: ${variables.secondarycolor};
     text-decoration: none;
     font-weight: bold;
-    border: ${borderCss};
+    border: ${borderCss}
     border-radius: 20px;
     margin: 5px;
     font-size: 1em;

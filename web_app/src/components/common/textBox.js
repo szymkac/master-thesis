@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FancyTextBox, FancyLabel, Row } from '../commonStyled';
 
 class TextBox extends Component {
     constructor(props) {
@@ -30,17 +31,21 @@ class TextBox extends Component {
     }
 
     render() {
-        const { labelText, propertyName, value } = this.props;
+        const { labelText, propertyName, value, smallLabel } = this.props;
         const input = !!propertyName ?
-            <input type="text" ref={this.inputRef} defaultValue={value} onChange={this.onUncontroledChange} />
-            : <input type="text" value={this.state.value} onChange={this.onControledChange} />;
+            <FancyTextBox type="text" ref={this.inputRef} defaultValue={value} onChange={this.onUncontroledChange} />
+            : <FancyTextBox type="text" value={this.state.value} onChange={this.onControledChange} />;
 
         if (!!labelText)
             return (
-                <label>
-                    {labelText}
-                    {input}
-                </label>
+                <FancyLabel smallLabel={smallLabel}>
+                    <Row>
+                        {labelText}
+                    </Row>
+                    <Row>
+                        {input}
+                    </Row>
+                </FancyLabel>
             );
         else
             return input;
