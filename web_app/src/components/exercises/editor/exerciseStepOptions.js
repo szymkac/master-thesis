@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getOptionsConfig } from './exercisesDiagramUtility/exercisesOptionsFactory';
+import { H3, H4 } from '../../commonStyled';
 
 class ExerciseStepOptions extends Component {
     constructor(props) {
@@ -42,22 +43,31 @@ class ExerciseStepOptions extends Component {
         const keys = !!config ? Object.keys(config) : [];
 
         return (
-            <div>
-                <h3>Options:</h3>
-                <h4>Node: {node.name}</h4>
+            <>
+                <H3 margin>Options:</H3>
+                <H4 margin>Node: {node.name}</H4>
                 {
                     keys.map(key => {
                         const keyConfig = config[key];
+
+                        let componentProps = {
+                            key: key,
+                            propertyName: key,
+                            labelText: keyConfig.labelText,
+                            value: this.state[key],
+                            onChange: this.onOptionChange,
+                            smallLabel: true
+                        };
+
+                        if (!!keyConfig.options)
+                            componentProps.options = keyConfig.options;
+
                         return <keyConfig.component
-                            key={key}
-                            propertyName={key}
-                            labelText={keyConfig.labelText}
-                            value={this.state[key]}
-                            onChange={this.onOptionChange}
-                            smallLabel={true} />
+                            {...componentProps}
+                        />
                     })
                 }
-            </div>
+            </>
         );
     }
 }

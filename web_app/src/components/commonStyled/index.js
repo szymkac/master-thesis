@@ -13,7 +13,9 @@ import FancyButtonLink from './fancy/fancyButtonLink';
 import FancyTextBox from './fancy/fancyTextBox';
 import FancyLabel from './fancy/fancyLabel';
 import FancyTextArea from './fancy/fancyTextArea';
-
+import FancySelect from './fancy/fancySelect';
+import FancyCheckBox, { FancyCheckBoxLabel } from './fancy/fancyCheckBox';
+import { H1, H2, H3, H4, H5, H6 } from './fancy/fancyH';
 
 export {
     ColumnContainer,
@@ -31,5 +33,9 @@ export {
     FancyButtonLink,
     FancyTextBox,
     FancyLabel,
-    FancyTextArea
+    FancyTextArea,
+    FancySelect,
+    FancyCheckBox,
+    FancyCheckBoxLabel,
+    H1, H2, H3, H4, H5, H6
 };

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FancyCheckBox, FancyLabel, FancyCheckBoxLabel } from '../commonStyled';
 
 class CheckBox extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class CheckBox extends Component {
 
     componentDidUpdate(prevProps) {
         if (!!this.inputRef && prevProps.value !== this.props.value)
-            this.inputRef.current.checked = this.props.value || "";
+            this.inputRef.current.checked = this.props.value || false;
     }
 
     onControledChange = event => {
@@ -30,17 +31,19 @@ class CheckBox extends Component {
     }
 
     render() {
-        const { labelText, propertyName, value } = this.props;
+        const { labelText, propertyName, value, smallLabel } = this.props;
         const input = !!propertyName ?
-            <input type="checkbox" ref={this.inputRef} defaultChecked={value} onChange={this.onUncontroledChange} />
-            : <input type="checkbox" checked={this.state.value} onChange={this.onControledChange} />;
+            <FancyCheckBox ref={this.inputRef} defaultChecked={value} onChange={this.onUncontroledChange} />
+            : <FancyCheckBox checked={this.state.value} onChange={this.onControledChange} />;
 
         if (!!labelText)
             return (
-                <label>
-                    {labelText}
+                <FancyLabel row smallLabel={smallLabel}>
                     {input}
-                </label>
+                    <FancyCheckBoxLabel>
+                        {labelText}
+                    </FancyCheckBoxLabel>
+                </FancyLabel>
             );
         else
             return input;

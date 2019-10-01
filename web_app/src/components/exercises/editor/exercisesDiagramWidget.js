@@ -115,7 +115,7 @@ class ExcercisesDiagramWidget extends Component {
                     </ExercisesDiagramWrapper>
                 </ColumnContainer>
 
-                <ColumnContainer center width="200px" padding="5px">
+                <ColumnContainer padding="5px" width="200px">
                     {!!optionsOfSelected ? <ExerciseStepOptions ref={this.optionsRef} node={selectedNode} optionsValues={optionsOfSelected} /> : "Select an exercise node to show options."}
                 </ColumnContainer>
             </RowContainer>

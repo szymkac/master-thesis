@@ -1,4 +1,5 @@
-import { TextBox, CheckBox } from '../../../common';
+import { TextBox, CheckBox, Select } from '../../../common';
+import { PRESSURE_OPTIONS, MEDIUM_PRESSURE } from '../../../../constants/pressureThresholdsOptions';
 
 const getOptionsConfig = exercise => {
     switch (exercise) {
@@ -36,7 +37,7 @@ const getOptionsConfig = exercise => {
             return {
                 showSucces: { component: CheckBox, labelText: "Show succes info after done" },
                 time: { component: TextBox, labelText: "Time of pressure [s]" },
-                threshold: { component: TextBox, labelText: "Pressure threshold", validation: { min: 1, max: 120 } },
+                threshold: { component: Select, labelText: "Pressure threshold", options: PRESSURE_OPTIONS },
                 rigor: { component: CheckBox, labelText: "Rigorous use of all fingers" }
             }
         case "LOOP":
@@ -74,7 +75,7 @@ const getOptionsValues = exercise => {
         case "SHIFTING":
             return { showSucces: true, threshold: 0.4 }; //TODO change units
         case "PRESSURE":
-            return { showSucces: true, time: 3, threshold: 60, rigor: true };
+            return { showSucces: true, time: 3, threshold: MEDIUM_PRESSURE, rigor: true };
         case "LOOP":
             return { showSucces: false, iterations: 3 };
         case "DELAY":
