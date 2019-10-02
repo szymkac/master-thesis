@@ -14,11 +14,11 @@ const getOptionsConfig = exercise => {
         case "TOUCHING":
             return {
                 showSucces: { component: CheckBox, labelText: "Show succes info after done" },
-                thumb: { component: CheckBox, labelText: "Touth with thumb" },
-                index: { component: CheckBox, labelText: "Touth with index finger" },
-                middle: { component: CheckBox, labelText: "Touth with middle finger" },
-                ring: { component: CheckBox, labelText: "Touth with ring finger" },
-                little: { component: CheckBox, labelText: "Touth with little finger" },
+                thumb: { component: CheckBox, labelText: "Touch with thumb" },
+                index: { component: CheckBox, labelText: "Touch with index finger" },
+                middle: { component: CheckBox, labelText: "Touch with middle finger" },
+                ring: { component: CheckBox, labelText: "Touch with ring finger" },
+                little: { component: CheckBox, labelText: "Touch with little finger" },
                 random: { component: CheckBox, labelText: "Randomly select fingers" },
                 randomMax: { component: TextBox, labelText: "Max amount of fingers" } //TODO disabled finger selection on random and enalbled randomMax (Maybe by extra onChange?)
             };

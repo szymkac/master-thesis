@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
 import { withFirebase } from '../../../services/firebase';
+import { RowContainer, FancyButton } from '../../commonStyled';
 
 class DeviceConnector extends Component {
     socket = null;
     deviceIP = null;
     listener = null;
     state = {
-        socketOpen: false
+        socketOpen: false,
+        buttonsDisabled: false
     }
+
 
     componentDidMount() {
         this.setDeviceListener();
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.authUser.uid !== this.props.authUser.uid || nextState.socketOpen !== this.state.socketOpen;
+        return nextProps.authUser.uid !== this.props.authUser.uid ||
+            nextState.socketOpen !== this.state.socketOpen ||
+            nextState.buttonsDisabled !== this.state.buttonsDisabled;
     }
 
     componentDidUpdate(prevProps) {
@@ -50,13 +55,13 @@ class DeviceConnector extends Component {
         this.socket = new WebSocket(`ws://${this.deviceIP}:81/`);
         this.socket.onerror = () => {
             console.log("socket error");
-            this.setState({ socketOpen: false });
+            this.setState({ socketOpen: false, buttonsDisabled: false });
             if (typeof onDeviceConnectionChange === "function")
                 onDeviceConnectionChange(false);
         }
         this.socket.onopen = () => {
             console.log("socket open");
-            this.setState({ socketOpen: true });
+            this.setState({ socketOpen: true, buttonsDisabled: true });
             if (typeof onDeviceConnectionChange === "function")
                 onDeviceConnectionChange(true);
         };
@@ -67,28 +72,32 @@ class DeviceConnector extends Component {
         if (!!this.socket && this.state.socketOpen) {
             this.socket.close();
             this.socket = null;
+            this.setState({ socketOpen: false, buttonsDisabled: false });
             if (typeof this.props.onDeviceConnectionChange === "function")
                 this.props.onDeviceConnectionChange(false);
         }
     }
 
     startWithoutDevice = () => {
-        console.log("try no connect");
         if (typeof this.props.onDeviceConnectionChange === "function")
             this.props.onDeviceConnectionChange(true);
+        this.setState({ buttonsDisabled: true });
+        console.log("lol")
     }
 
     render() {
-        const { userIsAdmin } = this.props;
-        const { socketOpen } = this.state;
+        const { showHidden } = this.props;
+        const { socketOpen, buttonsDisabled } = this.state;
 
         return (
-            <div>
+            <>
                 <h4>Device IP: {this.deviceIP || "no IP"}</h4>
                 {socketOpen ? "Connected" : "No connected"}
-                <button onClick={this.openDeviceSocket}>Try connect</button>
-                {userIsAdmin && <button onClick={this.startWithoutDevice} >Start without device</button>}
-            </div>
+                <RowContainer wrapping noBorder center>
+                    <FancyButton disabled={buttonsDisabled} onClick={this.openDeviceSocket}>Try connect</FancyButton>
+                    {showHidden && <FancyButton big disabled={buttonsDisabled} onClick={this.startWithoutDevice} >Start without device</FancyButton>}
+                </RowContainer>
+            </>
         );
     }
 }

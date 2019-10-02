@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import ExerciseBlockDiplayer from './exercisesBlocks/exerciseBlockDiplayer';
 import * as HANDS from '../../../constants/hands';
+import { RowContainer, FancyButton } from '../../commonStyled';
+import { SUCCESS } from '../../../constants/other';
 
-const succesModel = { customType: "SUCCESS" };
+const succesModel = { customType: SUCCESS };
 
 class ExerciseQueueDispayer extends Component {
     state = {
@@ -50,18 +52,20 @@ class ExerciseQueueDispayer extends Component {
     }
 
     render() {
-        const { exerciseModel, deviceData, hand, userIsAdmin } = this.props;
+        const { exerciseModel, deviceData, hand, showHidden } = this.props;
         const { currentStepIndex, showSucces } = this.state;
         return (
-            <div>
+            <>
                 <ExerciseBlockDiplayer
                     model={showSucces ? succesModel : exerciseModel.exerciseQueue[currentStepIndex]}
                     deviceData={currentStepIndex > 0 ? deviceData : null}
                     onStepDone={this.onStepDone}
                     hand={hand} />
-                Step {currentStepIndex + 1} of {exerciseModel.exerciseQueue.length}
-                {userIsAdmin && <button onClick={this.onStepDone}>Next step</button>}
-            </div>
+                <RowContainer center noBorder alignCenter padding="10px">
+                    Step {currentStepIndex + 1} of {exerciseModel.exerciseQueue.length}
+                    {showHidden && <FancyButton disabled={currentStepIndex + 1 === exerciseModel.exerciseQueue.length} onClick={this.onStepDone}>Next step</FancyButton>}
+                </RowContainer>
+            </>
         );
     }
 }

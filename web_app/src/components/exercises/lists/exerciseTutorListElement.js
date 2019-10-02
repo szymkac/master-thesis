@@ -1,15 +1,19 @@
 import React from 'react';
-import { FancyListRow, FancyListCell, FancyButtonLink } from '../../commonStyled';
+import { FancyListRow, FancyListCell, FancyButtonLink, TextContainer } from '../../commonStyled';
 
 const ExerciseTutorListElement = ({ exercise, linkState, url }) => (
     <FancyListRow>
 
         <FancyListCell width='20%'>
-            {exercise.name}
+            <TextContainer normal>
+                {exercise.name}
+            </TextContainer>
         </FancyListCell>
 
         <FancyListCell width='50%'>
-            {exercise.description}
+            <TextContainer normal>
+                {exercise.description}
+            </TextContainer>
         </FancyListCell>
 
         <FancyListCell center width='30%'>

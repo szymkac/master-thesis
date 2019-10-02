@@ -11,7 +11,7 @@ const ColumnContainer = styled.div`
     ${props => props.maxWidth && `max-width: ${props.maxWidth};`}
     ${props => props.padding && `padding: ${props.padding};`}
     flex-grow: ${props => props.grow ? props.grow : (props.width || props.minWidth || props.maxWidth) ? 0 : 1};
-
+    ${props => props.round && 'border-radius: 20px;'}
     ${props => props.center && css`
         align-items: center;
     `}

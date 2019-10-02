@@ -4,12 +4,12 @@ import ExercisesTutorListPage from './exercisesTutorListPage';
 import ExercisesEditor from '../../components/exercises/editor/exercisesEditor';
 import ExercisesTutor from '../../components/exercises/tutor/exercisesTutor';
 import { ExercisesNavigation } from './exercisesNavigation';
-import { Page } from '../../components/commonStyled';
+import { Page, H1 } from '../../components/commonStyled';
 import { withAuthorization, isUserOnline } from '../../services/session';
 
 const ExercisesPage = ({ match }) => (
   <Page>
-    <h1>Exercises Page</h1>
+    <H1 margin>Exercises Page</H1>
     <ExercisesNavigation match={match} />
   </Page>
 );

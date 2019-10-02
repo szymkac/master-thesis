@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FancyListRow, FancyListCell, FancyButtonLink, FancyButton } from '../../commonStyled';
+import { FancyListRow, FancyListCell, FancyButtonLink, FancyButton, TextContainer } from '../../commonStyled';
 
 class ExerciseEditorListElement extends Component {
     onRemove = () => {
@@ -13,11 +13,15 @@ class ExerciseEditorListElement extends Component {
             <FancyListRow key={exercise.uid}>
 
                 <FancyListCell width='20%'>
-                    {exercise.name}
+                    <TextContainer normal>
+                        {exercise.name}
+                    </TextContainer>
                 </FancyListCell>
 
                 <FancyListCell width='50%'>
-                    {exercise.description}
+                    <TextContainer normal>
+                        {exercise.description}
+                    </TextContainer>
                 </FancyListCell>
 
                 <FancyListCell width='30%' center>

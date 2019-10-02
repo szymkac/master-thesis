@@ -1,24 +1,30 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
-import * as ROLES from '../../constants/roles';
+import { ROLES_OPTIONS, ROLES } from '../../constants/roles';
 import { withFirebase } from '../../services/firebase';
 import { compose } from 'recompose';
-import { Page } from '../../components/commonStyled';
+import { Page, H1, RowContainer, ColumnContainer, FancyForm, FancyButton } from '../../components/commonStyled';
+import { TextBox, Select } from '../../components/common';
+import { withAuthorization, isUserOffline } from '../../services/session';
 
 const INITIAL_STATE = {
   username: '',
   email: '',
   passwordOne: '',
   passwordTwo: '',
-  isAdmin: false,
+  role: ROLES.PATIENT,
   error: null,
 };
 
 const SignUpPage = () => (
   <Page>
-    <h1>Register</h1>
-    <SignUpForm />
+    <H1 margin>Register</H1>
+    <RowContainer noBorder center>
+      <ColumnContainer round width="500px" padding="25px" center>
+        <SignUpForm />
+      </ColumnContainer>
+    </RowContainer>
   </Page>
 );
 
@@ -26,13 +32,13 @@ class SignUpFormBase extends Component {
   state = {
     ...INITIAL_STATE
   }
+
   onSubmit = event => {
-    const { username, email, passwordOne, isAdmin } = this.state;
-    const roles = isAdmin ? [ROLES.ADMIN] : [];
+    const { username, email, passwordOne, role } = this.state;
+    const roles = [role];
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
-        console.log("new user");
         return this.props.firebase
           .user(authUser.user.uid)
           .set({
@@ -51,19 +57,18 @@ class SignUpFormBase extends Component {
 
     event.preventDefault();
   }
-  onChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-  onChangeCheckbox = event => {
-    this.setState({ [event.target.name]: event.target.checked });
-  }
+
+  onChange = (value, propertyName) => {
+    this.setState({ [propertyName]: value });
+  };
+
   render() {
     const {
       username,
       email,
       passwordOne,
       passwordTwo,
-      isAdmin,
+      role,
       error,
     } = this.state;
 
@@ -71,51 +76,56 @@ class SignUpFormBase extends Component {
       passwordOne !== passwordTwo ||
       passwordOne === '' ||
       email === '' ||
-      username === '';
+      username === '' ||
+      role === null;
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
+      <FancyForm onSubmit={this.onSubmit}>
+        <TextBox
           name="username"
+          propertyName="username"
           value={username}
           onChange={this.onChange}
           type="text"
-          placeholder="Full Name"
-        />
-        <input
+          placeholder="Full Name" />
+
+        <TextBox
           name="email"
+          propertyName="email"
           value={email}
           onChange={this.onChange}
           type="text"
-          placeholder="Email Address"
-        />
-        <input
+          placeholder="Email Address" />
+
+        <TextBox
           name="passwordOne"
+          propertyName="passwordOne"
           value={passwordOne}
           onChange={this.onChange}
           type="password"
-          placeholder="Password"
-        />
-        <input
+          placeholder="Password" />
+
+        <TextBox
           name="passwordTwo"
+          propertyName="passwordTwo"
           value={passwordTwo}
           onChange={this.onChange}
           type="password"
-          placeholder="Confirm Password"
+          placeholder="Confirm Password" />
+
+        <Select
+          name="role"
+          propertyName="name"
+          value={role}
+          onChange={this.onChange}
+          placeholder="User role"
+          options={ROLES_OPTIONS}
         />
-        <label>
-          Admin:
-          <input
-            name="isAdmin"
-            type="checkbox"
-            checked={isAdmin}
-            onChange={this.onChangeCheckbox}
-          />
-        </label>
-        <button type="submit" disabled={isInvalid}>Sign Up</button>
+
+        <FancyButton stretch type="submit" disabled={isInvalid}>Sign Up</FancyButton>
 
         {error && <p>{error.message}</p>}
-      </form>
+      </FancyForm>
     )
   }
 }
@@ -127,10 +137,9 @@ const SignUpForm = compose(
 
 const SignUpLink = () => (
   <p>
-    Don't have an account?
-        <Link to={ROUTES.SIGN_UP}>Create an account</Link>
+    Don't have an account?  <Link to={ROUTES.SIGN_UP}>Create an account</Link>
   </p>
 )
 
-export default SignUpPage;
+export default withAuthorization(isUserOffline)(SignUpPage);
 export { SignUpLink, SignUpForm }

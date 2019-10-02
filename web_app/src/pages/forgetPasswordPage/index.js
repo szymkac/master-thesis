@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withFirebase } from '../../services/firebase';
-import { withAuthorization, isUserOnline } from '../../services/session';
 import * as ROUTES from '../../constants/routes';
-import { Page } from '../../components/commonStyled';
+import { Page, H1, RowContainer, ColumnContainer, FancyForm, FancyButton } from '../../components/commonStyled';
+import { TextBox } from '../../components/common';
+import { withAuthorization, isUserOffline } from '../../services/session';
 
 const ForgetPasswordPage = () => (
   <Page>
-    <h1>PasswordForget</h1>
-    <ForgetPasswordForm />
+    <H1 margin>Forget Password</H1>
+    <RowContainer noBorder center>
+      <ColumnContainer round width="500px" padding="25px" center>
+        <ForgetPasswordForm />
+      </ColumnContainer>
+    </RowContainer>
   </Page>
 );
 
@@ -39,8 +44,8 @@ class ForgetPasswordFormBase extends Component {
     event.preventDefault();
   };
 
-  onChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+  onChange = (value, propertyName) => {
+    this.setState({ [propertyName]: value });
   };
 
   render() {
@@ -49,32 +54,33 @@ class ForgetPasswordFormBase extends Component {
     const isInvalid = email === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
+      <FancyForm onSubmit={this.onSubmit}>
+        <TextBox
           name="email"
+          propertyName="email"
           value={this.state.email}
           onChange={this.onChange}
           type="text"
           placeholder="Email Address"
         />
-        <button disabled={isInvalid} type="submit">
+        <FancyButton stretch disabled={isInvalid} type="submit">
           Reset My Password
-        </button>
+        </FancyButton>
 
         {error && <p>{error.message}</p>}
-      </form>
+      </FancyForm>
     );
   }
 }
 
 const ForgetPasswordLink = () => (
   <p>
-    <Link to={ROUTES.PASSWORD_FORGET}>Forgot Password?</Link>
+    Forgot Password? <Link to={ROUTES.PASSWORD_FORGET}>Click here!</Link>
   </p>
 );
 
 const ForgetPasswordForm = withFirebase(ForgetPasswordFormBase);
 
-export default withAuthorization(isUserOnline)(ForgetPasswordPage);
+export default withAuthorization(isUserOffline)(ForgetPasswordPage);
 
 export { ForgetPasswordForm, ForgetPasswordLink };

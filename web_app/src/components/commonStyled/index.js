@@ -4,6 +4,7 @@ import FillContainer from './fillContainer';
 import SquareContainer from './squareContainer';
 import Page from './page';
 import Row from './row';
+import TextContainer from './textContainer';
 import FancyMenuLink from './fancy/fancyMenuLink';
 import FancyMenuButton from './fancy/fancyMenuButton';
 import FancyBlockMenuLink from './fancy/fancyBlockMenuLink';
@@ -15,6 +16,7 @@ import FancyLabel from './fancy/fancyLabel';
 import FancyTextArea from './fancy/fancyTextArea';
 import FancySelect from './fancy/fancySelect';
 import FancyCheckBox, { FancyCheckBoxLabel } from './fancy/fancyCheckBox';
+import FancyForm from './fancy/fancyForm';
 import { H1, H2, H3, H4, H5, H6 } from './fancy/fancyH';
 
 export {
@@ -24,6 +26,7 @@ export {
     SquareContainer,
     Page,
     Row,
+    TextContainer,
     FancyMenuLink,
     FancyMenuButton,
     FancyBlockMenuLink,
@@ -37,5 +40,6 @@ export {
     FancySelect,
     FancyCheckBox,
     FancyCheckBoxLabel,
+    FancyForm,
     H1, H2, H3, H4, H5, H6
 };

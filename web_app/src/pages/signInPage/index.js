@@ -5,7 +5,9 @@ import { SignUpLink } from '../signUpPage'
 import { withFirebase } from '../../services/firebase';
 import { compose } from 'recompose';
 import { ForgetPasswordLink } from '../forgetPasswordPage'
-import { Page } from '../../components/commonStyled';
+import { Page, H1, RowContainer, ColumnContainer, FancyForm, FancyButton } from '../../components/commonStyled';
+import { TextBox } from '../../components/common';
+import { withAuthorization, isUserOffline } from '../../services/session';
 
 const INITIAL_STATE = {
     email: '',
@@ -15,10 +17,14 @@ const INITIAL_STATE = {
 
 const SignInPage = () => (
     <Page>
-        <h1>Login</h1>
-        <SignInForm />
-        <SignUpLink />
-        <ForgetPasswordLink />
+        <H1 margin>Login</H1>
+        <RowContainer noBorder center>
+            <ColumnContainer round width="500px" padding="25px" center>
+                <SignInForm />
+                <SignUpLink />
+                <ForgetPasswordLink />
+            </ColumnContainer>
+        </RowContainer>
     </Page>
 );
 
@@ -26,6 +32,7 @@ class SignInFormBase extends Component {
     state = {
         ...INITIAL_STATE
     }
+
     onSubmit = event => {
         const { email, password } = this.state;
 
@@ -41,34 +48,36 @@ class SignInFormBase extends Component {
 
         event.preventDefault();
     }
-    onChange = event => {
-        this.setState({ [event.target.name]: event.target.value });
+
+    onChange = (value, propertyName) => {
+        this.setState({ [propertyName]: value });
     };
+
     render() {
         const { email, password, error } = this.state;
         const isInvalid = password === '' || email === '';
 
         return (
-            <form onSubmit={this.onSubmit}>
-                <input
+            <FancyForm onSubmit={this.onSubmit}>
+                <TextBox
                     name="email"
+                    propertyName="email"
                     value={email}
                     onChange={this.onChange}
                     type="text"
                     placeholder="Email Address"
                 />
-                <input
+                <TextBox
                     name="password"
+                    propertyName="password"
                     value={password}
                     onChange={this.onChange}
                     type="password"
                     placeholder="Password"
                 />
-                <button disabled={isInvalid} type="submit">
-                    Sign In
-                </button>
+                <FancyButton stretch disabled={isInvalid} type="submit">Sign In</FancyButton>
                 {error && <p>{error.message}</p>}
-            </form>
+            </FancyForm>
         )
     }
 }
@@ -78,5 +87,5 @@ const SignInForm = compose(
     withFirebase
 )(SignInFormBase);
 
-export default SignInPage;
+export default withAuthorization(isUserOffline)(SignInPage);
 export { SignInForm }

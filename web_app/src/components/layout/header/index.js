@@ -1,22 +1,43 @@
 import React from 'react';
-import './header.scss';
+import styled from 'styled-components';
+import { borderCss } from '../../commonStyled/fancy/fancyBase';
+import variables from '../../../content/commonStyles/variables.scss'
 
-const MenuButton = ({ onClick }) => (
-    <div className="menu-button" onClick={onClick}>
-        <div className="menu-bar"></div>
-        <div className="menu-bar"></div>
-        <div className="menu-bar"></div>
-    </div>
+const HeaderContainer = styled.div`
+    height: 50px;
+    border-bottom: ${borderCss}
+    display: flex;
+    align-items: center;
+`;
+
+const MenuButton = styled.div`
+    cursor: pointer;
+    width: 35px;
+    margin: 0 5px;
+`;
+
+const MenuBar = styled.div`
+    box-sizing: border-box;
+    width: 35px;
+    height: 5px;
+    background-color: ${variables.tertiarycolor};
+    margin: 6px 0;
+    border-radius: 5px;
+    border: 1px solid ${variables.tertiarycolor};
+`;
+
+const FancyMenuButton = ({ onClick }) => (
+    <MenuButton onClick={onClick}>
+        <MenuBar></MenuBar>
+        <MenuBar></MenuBar>
+        <MenuBar></MenuBar>
+    </MenuButton>
 );
 
-//TODO convert classes to styled components
 const Header = ({ onMenuOpenClick }) => (
-    <div className="header-container">
-        <MenuButton onClick={onMenuOpenClick} />
-        <div className="logo-container">
-        </div>
-        <div className="menu-settings"></div>
-    </div>
+    <HeaderContainer>
+        <FancyMenuButton onClick={onMenuOpenClick} />
+    </HeaderContainer>
 );
 
 export default Header;

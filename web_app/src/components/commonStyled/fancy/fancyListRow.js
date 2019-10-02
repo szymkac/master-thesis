@@ -5,6 +5,7 @@ import FancyButton from './fancyButton';
 import FancyButtonLink from './fancyButtonLink';
 
 const FancyListRow = styled.div`
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     border-left: ${borderCss}
@@ -30,15 +31,13 @@ const FancyListRow = styled.div`
 `;
 
 const FancyListCell = styled.div`
+    box-sizing: border-box;
     display: flex;
     padding: 10px;
     border-right: ${borderCss}
-    flex-grow: 1;
-    flex-shrink: 1;
+    flex-grow: 0;
+    flex-shrink: 0;
     flex-wrap: wrap;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     ${props => props.width && `width: ${props.width};`}
     ${props => props.center && 'justify-content: center;'}
     

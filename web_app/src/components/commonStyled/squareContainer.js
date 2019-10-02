@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const SquareContainer = styled.div`
     height: ${props => props.size || '100px'};

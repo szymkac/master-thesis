@@ -22,6 +22,16 @@ const fancyButtonBase = css`
         background: ${variables.secondarycolor};
         color: white;
     }
+    
+    &:disabled{
+        color: ${variables.disabledsecondary};
+        border-color: ${variables.disabledsecondary};
+
+        &:hover{
+            filter: brightness(85%);
+            background: transparent;
+        }
+    }
 `;
 
 const FancyButton = styled.button`
@@ -29,6 +39,10 @@ const FancyButton = styled.button`
     outline: none;
 
     ${fancyButtonBase}
+
+    ${props => props.stretch && 'width: calc(100% - 20px);'}
+    ${props => props.big && 'width: 250px;'}
+
 `;
 
 export default FancyButton;

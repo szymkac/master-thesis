@@ -1,11 +1,11 @@
 import React from 'react';
 import { withAuthorization, isUserOnline } from '../../services/session';
-import { Page } from '../../components/commonStyled';
+import { Page, H1 } from '../../components/commonStyled';
 import { ExerciseTutorList } from '../../components/exercises/lists';
 
 const ExercisesTutorListPage = ({ match, authUser }) => (
     <Page>
-        <h1>Exercises Page</h1>
+        <H1 margin>Exercises Tutor Page</H1>
         <ExerciseTutorList match={match} authUser={authUser} />
     </Page>
 );

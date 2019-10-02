@@ -2,7 +2,7 @@
 
 html,
 body,
-#root {
+.root {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -12,17 +12,25 @@ body,
     sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  user-select: none
 }
 
-.root{
+.root {
   background-color: $background-color;
-  overflow:auto;
+  overflow: auto;
 }
 
-h1,h2,h3,h4,h5,h6,p{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0;
+  word-break: break-all;
 }
 
-input[type="checkbox"]{
+input[type="checkbox"] {
   margin: 0;
 }

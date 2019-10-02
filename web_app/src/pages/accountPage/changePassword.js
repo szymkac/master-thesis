@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { withFirebase } from '../../services/firebase';
+import { FancyForm, FancyButton } from '../../components/commonStyled';
+import { TextBox } from '../../components/common';
 
 const INITIAL_STATE = {
   passwordOne: '',
@@ -38,27 +40,29 @@ class ChangePassword extends Component {
       passwordOne !== passwordTwo || passwordOne === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
+      <FancyForm onSubmit={this.onSubmit}>
+        <TextBox
           name="passwordOne"
+          propertyName="passwordOne"
           value={passwordOne}
           onChange={this.onChange}
           type="password"
           placeholder="New Password"
         />
-        <input
+        <TextBox
           name="passwordTwo"
+          propertyName="passwordTwo"
           value={passwordTwo}
           onChange={this.onChange}
           type="password"
           placeholder="Confirm New Password"
         />
-        <button disabled={isInvalid} type="submit">
+        <FancyButton stretch disabled={isInvalid} type="submit">
           Reset My Password
-        </button>
+        </FancyButton>
 
         {error && <p>{error.message}</p>}
-      </form>
+      </FancyForm>
     );
   }
 }

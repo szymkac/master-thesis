@@ -6,6 +6,7 @@ const RowContainer = styled.div`
     display: flex;
     flex-direction: row;
     ${props => !props.noBorder && `border: ${borderCss}`}
+    ${props => props.height && `height: ${props.height};`}
     ${props => props.width && `width: ${props.width};`}
     ${props => props.minWidth && `min-width: ${props.minWidth};`}
     ${props => props.maxWidth && `max-width: ${props.maxWidth};`}
@@ -14,6 +15,7 @@ const RowContainer = styled.div`
     ${props => !!props.wrapping && 'flex-wrap: wrap;'}
     height: ${props => props.height || 'auto'};
     justify-content: ${props => props.center ? 'center' : 'flex-start'};
+    ${props => !!props.alignCenter && 'align-items: center;'}
 `;
 
 export default RowContainer;

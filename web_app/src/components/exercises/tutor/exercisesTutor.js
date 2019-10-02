@@ -4,14 +4,15 @@ import ExerciseModel from '../../../models/exerciseModel';
 import ExerciseQueueDispayer from './exerciseQueueDispayer'
 import DeviceConnector from '../device/deviceConnector';
 import DeviceData from '../../../models/deviceData';
-import * as ROLES from '../../../constants/roles';
+import { ROLES } from '../../../constants/roles';
+import { RowContainer, ColumnContainer } from '../../commonStyled';
 
 class ExercisesTutor extends Component {
     state = {
         loading: false,
         exercise: null,
         deviceConnection: false,
-        deviceData: null,
+        deviceData: null
     }
 
     componentDidMount() {
@@ -52,27 +53,33 @@ class ExercisesTutor extends Component {
     render() {
         const { location } = this.props;
         const { exercise, loading, deviceConnection, deviceData } = this.state;
-        const userIsAdmin = location.state.authUser.roles.includes(ROLES.ADMIN);
+        const userRoles = location.state.authUser.roles;
+        const showHidden = userRoles.includes(ROLES.ADMIN);
 
         return (
-            <div>
-                <DeviceConnector authUser={location.state.authUser}
-                    onDeviceConnectionChange={this.onDeviceConnectionChange}
-                    onMessage={this.onDeviceData}
-                    userIsAdmin={userIsAdmin} />
-
-                {loading && <div>Loading...</div>}
-                <h1>{(!!exercise && exercise.name) || "Default exercise name"}</h1>
-                <h4>{(!!exercise && exercise.description) || "Default exercise description"}</h4>
+            <>
+                <RowContainer noBorder>
+                    <ColumnContainer width="70%" noBorder>
+                        {loading && <div>Loading...</div>}
+                        <h1>{(!!exercise && exercise.name) || "Default exercise name"}</h1>
+                        <h4>{(!!exercise && exercise.description) || "Default exercise description"}</h4>
+                    </ColumnContainer>
+                    <ColumnContainer width="30%" padding="10px">
+                        <DeviceConnector authUser={location.state.authUser}
+                            onDeviceConnectionChange={this.onDeviceConnectionChange}
+                            onMessage={this.onDeviceData}
+                            showHidden={showHidden} />
+                    </ColumnContainer>
+                </RowContainer>
                 {
                     (exercise && deviceConnection) &&
                     <ExerciseQueueDispayer key={exercise.uid}
                         exerciseModel={exercise}
                         hand={location.state.hand}
                         deviceData={deviceData}
-                        userIsAdmin={userIsAdmin} />
+                        showHidden={showHidden} />
                 }
-            </div>
+            </>
         );
     }
 }

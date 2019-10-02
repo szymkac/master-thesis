@@ -1,7 +1,7 @@
 import React from 'react';
 import { FancyMenuLink } from '../../commonStyled';
 import * as ROUTES from '../../../constants/routes';
-import * as ROLES from '../../../constants/roles';
+import { ROLES } from '../../../constants/roles';
 import SignOutButton from '../signOut'
 import { AuthUserContext } from '../../../services/session';
 

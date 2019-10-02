@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TimerBlock from './timerBlock';
 import { ExerciseBlockWrapper } from '../../styled';
+import { TextContainer } from '../../../commonStyled';
 
 class DelayBlock extends Component {
 
@@ -14,8 +15,10 @@ class DelayBlock extends Component {
         const secondsLimit = !!model && model.customType === "DELAY" ? model.delayTime : 3;
         return (
             <ExerciseBlockWrapper>
-                <h1>{text}</h1>
-                <TimerBlock startAtMount={true} onTimerDone={this.onTimerDone} secondsLimit={secondsLimit} />
+                <TextContainer center>
+                    <h1>{text}</h1>
+                    <TimerBlock startAtMount={true} onTimerDone={this.onTimerDone} secondsLimit={secondsLimit} />
+                </TextContainer>
             </ExerciseBlockWrapper>
         );
     }

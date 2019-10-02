@@ -31,10 +31,13 @@ class TextBox extends Component {
     }
 
     render() {
-        const { labelText, propertyName, value, smallLabel } = this.props;
+        const { labelText, propertyName, value, smallLabel, placeholder, name, type } = this.props;
+        const inputType = type || "text";
+
+
         const input = !!propertyName ?
-            <FancyTextBox type="text" ref={this.inputRef} defaultValue={value} onChange={this.onUncontroledChange} />
-            : <FancyTextBox type="text" value={this.state.value} onChange={this.onControledChange} />;
+            <FancyTextBox type={inputType} name={name} ref={this.inputRef} placeholder={placeholder} defaultValue={value} onChange={this.onUncontroledChange} />
+            : <FancyTextBox type={inputType} name={name} value={this.state.value} placeholder={placeholder} onChange={this.onControledChange} />;
 
         if (!!labelText)
             return (

@@ -31,10 +31,10 @@ class Select extends Component {
     }
 
     render() {
-        const { labelText, propertyName, value, smallLabel, options } = this.props;
+        const { labelText, propertyName, value, smallLabel, options, placeholder } = this.props;
         const selectProps = !!propertyName ?
-            { ref: this.inputRef, defaultValue: value, onChange: this.onUncontroledChange }
-            : { value: this.state.value, onChange: this.onControledChange };
+            { ref: this.inputRef, defaultValue: value, onChange: this.onUncontroledChange, placeholder: placeholder }
+            : { value: this.state.value, onChange: this.onControledChange, placeholder: placeholder };
 
         const select = <FancySelect {...selectProps}>
             {options.map(x => <option key={x.value} value={x.value}>{x.description}</option>)}
