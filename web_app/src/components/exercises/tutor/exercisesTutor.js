@@ -45,7 +45,7 @@ class ExercisesTutor extends Component {
     }
 
     onDeviceData = e => {
-        console.log(e.data);
+        //console.log(e.data);
         const data = new DeviceData(e.data);
         if (data.valid)
             this.setState({ deviceData: data })

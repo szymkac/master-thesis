@@ -21,6 +21,16 @@ class ExerciseQueueDispayer extends Component {
         const currentNode = exerciseQueue[currentStepIndex];
         const nextNode = exerciseQueue[currentStepIndex + 1];
 
+        if (currentNode.customType === EXERCISES.START.type) {
+            this.startTime = performance.now();
+            console.log(this.startTime)
+        }
+        else if (currentNode.customType === EXERCISES.FINISH.type) {
+            const endTime = performance.now();
+            this.props.onFinish(endTime - this.startTime);
+            console.log(endTime)
+        }
+
         if (showSucces)
             showSucces = false;
         else {
@@ -41,12 +51,6 @@ class ExerciseQueueDispayer extends Component {
                     break;
                 default:
                     showSucces = currentNode.customType !== EXERCISES.START.type && currentNode.customType !== EXERCISES.DELAY.type && currentNode.options.showSucces;
-
-                    if (currentNode.customType === EXERCISES.START.type)
-                        this.startTime = performance.now();
-                    else if (nextNode.customType === EXERCISES.FINISH.type)
-                        this.props.onFinish(performance.now() - this.startTime);
-
                     currentStepIndex++;
                     break;
             }
