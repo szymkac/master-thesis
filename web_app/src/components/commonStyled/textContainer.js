@@ -10,7 +10,7 @@ const TextContainer = styled.div`
             props.normal ?
                 css`
                     white-space: normal;
-                    word-wrap: break-word;
+                    ${props => !props.noWrap && 'word-wrap: break-word;'}
                     width: 100%;
                 ` :
                 css`

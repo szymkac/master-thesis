@@ -57,7 +57,7 @@ class ExerciseBlockDiplayer extends Component {
                 break;
         }
 
-        const description = EXERCISES[model.customType].description;
+        const description = model.customType !== SUCCESS ? EXERCISES[model.customType].description : null;
 
         return (
             <>

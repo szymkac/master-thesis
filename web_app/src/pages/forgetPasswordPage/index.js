@@ -4,7 +4,6 @@ import { withFirebase } from '../../services/firebase';
 import * as ROUTES from '../../constants/routes';
 import { Page, H1, RowContainer, ColumnContainer, FancyForm, FancyButton } from '../../components/commonStyled';
 import { TextBox } from '../../components/common';
-import { withAuthorization, isUserOffline } from '../../services/session';
 
 const ForgetPasswordPage = () => (
   <Page>
@@ -81,6 +80,6 @@ const ForgetPasswordLink = () => (
 
 const ForgetPasswordForm = withFirebase(ForgetPasswordFormBase);
 
-export default withAuthorization(isUserOffline)(ForgetPasswordPage);
+export default ForgetPasswordPage;
 
 export { ForgetPasswordForm, ForgetPasswordLink };

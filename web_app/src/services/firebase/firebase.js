@@ -82,6 +82,10 @@ class Firebase {
     }
 
     removeExercise = uid => this.exercises().child(uid).remove();
+
+    results = () => this.db.ref('results');
+
+    result = uid => this.db.ref(`results/${uid}`);
 }
 
 export default Firebase;

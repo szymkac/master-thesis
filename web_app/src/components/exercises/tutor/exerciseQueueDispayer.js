@@ -3,6 +3,7 @@ import ExerciseBlockDiplayer from './exercisesBlocks/exerciseBlockDiplayer';
 import * as HANDS from '../../../constants/hands';
 import { RowContainer, FancyButton } from '../../commonStyled';
 import { SUCCESS } from '../../../constants/other';
+import * as EXERCISES from '../../../constants/exercises';
 
 const succesModel = { customType: SUCCESS };
 
@@ -12,6 +13,7 @@ class ExerciseQueueDispayer extends Component {
         loopIterator: {},
         showSucces: false
     }
+    startTime = null;
 
     onStepDone = () => {
         const exerciseQueue = this.props.exerciseModel.exerciseQueue;
@@ -23,7 +25,7 @@ class ExerciseQueueDispayer extends Component {
             showSucces = false;
         else {
             switch (nextNode.customType) {
-                case "LOOP":
+                case EXERCISES.LOOP.type:
                     loopIterator = { ...loopIterator, [nextNode.id]: (!!loopIterator[nextNode.id] ? loopIterator[nextNode.id] + 1 : 1) };
                     if (loopIterator[nextNode.id] >= nextNode.options.iterations) {
                         currentStepIndex = currentStepIndex + 2;
@@ -34,11 +36,17 @@ class ExerciseQueueDispayer extends Component {
                         showSucces = currentNode.options.showSucces;
                     }
                     break;
-                case "SINGPOST":
+                case EXERCISES.SINGPOST.type:
                     currentStepIndex += 2;
                     break;
                 default:
-                    showSucces = currentNode.customType !== "START" && currentNode.customType !== "DELAY" && currentNode.options.showSucces;
+                    showSucces = currentNode.customType !== EXERCISES.START.type && currentNode.customType !== EXERCISES.DELAY.type && currentNode.options.showSucces;
+
+                    if (currentNode.customType === EXERCISES.START.type)
+                        this.startTime = performance.now();
+                    else if (nextNode.customType === EXERCISES.FINISH.type)
+                        this.props.onFinish(performance.now() - this.startTime);
+
                     currentStepIndex++;
                     break;
             }

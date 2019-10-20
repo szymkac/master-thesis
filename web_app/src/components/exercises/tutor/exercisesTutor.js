@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { compose } from 'recompose';
 import { withFirebase } from '../../../services/firebase/index';
 import ExerciseModel from '../../../models/exerciseModel';
 import ExerciseQueueDispayer from './exerciseQueueDispayer'
@@ -50,6 +51,18 @@ class ExercisesTutor extends Component {
             this.setState({ deviceData: data })
     }
 
+    onFinish = time => {
+        const { firebase, location, match } = this.props;
+
+        const result = {
+            userUid: location.state.authUser.uid,
+            exerciseUid: match.params.id,
+            time: time
+        }
+
+        firebase.results().push(result);
+    }
+
     render() {
         const { location } = this.props;
         const { exercise, loading, deviceConnection, deviceData } = this.state;
@@ -77,11 +90,14 @@ class ExercisesTutor extends Component {
                         exerciseModel={exercise}
                         hand={location.state.hand}
                         deviceData={deviceData}
-                        showHidden={showHidden} />
+                        showHidden={showHidden}
+                        onFinish={this.onFinish} />
                 }
             </>
         );
     }
 }
 
-export default withFirebase(ExercisesTutor);
+export default compose(
+    withFirebase
+)(ExercisesTutor);

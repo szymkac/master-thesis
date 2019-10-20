@@ -6,7 +6,6 @@ import { withFirebase } from '../../services/firebase';
 import { compose } from 'recompose';
 import { Page, H1, RowContainer, ColumnContainer, FancyForm, FancyButton } from '../../components/commonStyled';
 import { TextBox, Select } from '../../components/common';
-import { withAuthorization, isUserOffline } from '../../services/session';
 
 const INITIAL_STATE = {
   username: '',
@@ -141,5 +140,5 @@ const SignUpLink = () => (
   </p>
 )
 
-export default withAuthorization(isUserOffline)(SignUpPage);
+export default SignUpPage;
 export { SignUpLink, SignUpForm }

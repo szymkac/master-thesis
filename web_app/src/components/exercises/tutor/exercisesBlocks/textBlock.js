@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ExerciseBlockWrapper } from '../../styled';
-import { TextContainer } from '../../../commonStyled';
+import { TextContainer, H1 } from '../../../commonStyled';
 
 
 class TextBlock extends Component {
@@ -9,8 +9,8 @@ class TextBlock extends Component {
 
         return (
             <ExerciseBlockWrapper>
-                    <TextContainer center>
-                        <h1>{text}</h1>
+                    <TextContainer noWrap center>
+                        <H1>{text}</H1>
                     </TextContainer>
                     {children}
             </ExerciseBlockWrapper>

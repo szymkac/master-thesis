@@ -377,7 +377,7 @@ void readJsonConfig()
     }
     else
     {
-        JsonString = "<{\"m\":\"C\",\"ssid\":\"Lucky\",\"pass\":\"123456789\",\"user\":\"FlWjVDVNGAZ6qzQFbBUaN3RSbtP2\"}>";
+        JsonString = "<{\"m\":\"C\",\"ssid\":\"Lucky\",\"pass\":\"123456789\",\"user\":\"YxLpDtDEleQ3p3trNyUvixBekm82\"}>";
     }
 }
 

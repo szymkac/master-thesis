@@ -82,7 +82,6 @@ class DeviceConnector extends Component {
         if (typeof this.props.onDeviceConnectionChange === "function")
             this.props.onDeviceConnectionChange(true);
         this.setState({ buttonsDisabled: true });
-        console.log("lol")
     }
 
     render() {
